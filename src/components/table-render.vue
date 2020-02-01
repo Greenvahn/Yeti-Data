@@ -1,6 +1,8 @@
 <template>
 <div class="container">
-    <div>{{dataTable}}</div>
+    <div v-for="item in dataTable" v-bind:key="item[0]" class="columns">
+        <div v-for="element in item" v-bind:key="element" class="column">{{element}}</div>
+    </div>
 </div>
 </template>
 
@@ -14,3 +16,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+
+</style>

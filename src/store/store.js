@@ -1,41 +1,43 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import d3 from 'd3'
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state:{
-        instructions: 'launch',
+        title: 'Data display',
+        description: 'A single-page application to display your .csv files.',
+        instructions: {
+            main: 'Start by loading your csv file. After that, press on "launch" button to display the data.',
+            button: 'launch'
+        },
+        showLaunch: false,
         dataFile: null
     },
     mutations:{
         loadDataFile (state, payload){
             
-            //state.dataFile = payload;
+            // Creates empty array
+            const dataArray = []
 
-            const table = document.createElement("table");
+            // Lets split the data by rows
             let rows =  payload.split("\n");
-            console.log(rows)
+
+            // iterate through the rows
             for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].split(",");
-                if (cells.length > 1) {
-                    var row = table.insertRow(-1);
-                    for (var j = 0; j < cells.length; j++) {
-                        var cell = row.insertCell(-1);
-                        cell.innerHTML = cells[j];
-                        //console.log(cell)
-                    }
-                }
+                // push each element into dataArray
+                dataArray.push(rows[i].split(","));
             }
-            state.dataFile = table;
+
+            // mutates dataFile state wit dataArray values
+            state.dataFile = dataArray;
+        },
+        showLaunch (state, payload){
+                state.showLaunch = payload
         }
 
     },
     getters:{
-        getInstruction(state){
-            return state.instructions
-        },
         getTable(state){
             return state.dataFile
         } 

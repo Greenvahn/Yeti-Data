@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <p>Load your file here</p>
-    <input-loader @loadData="updateData"></input-loader>
-    <!-- <button-launcher v-bind:dataFileName="fileName"@loadData="updateData"></button-launcher> -->
+    <h1>{{title}}</h1>
+    <p class="desc">{{description}}</p>
+    <div class="message is-info">
+      <div class="message-body">{{instruction}}</div>
+    </div>
+    <input-loader></input-loader>
     <table-render></table-render>
   </div>
 </template>
@@ -10,6 +13,7 @@
 <script>
 import inputLoader from './components/input-loader.vue'
 import tableRender from './components/table-render.vue'
+import * as d3 from "d3"
 
 export default {
   name: 'app',
@@ -19,15 +23,21 @@ export default {
   },
   data(){
       return{
-        dataText: ""
+        loadData: {}
       }
     },
     methods:{
-      updateData(value){
-        this.dataText = value;
-      }
     },
   computed: {
+    instruction(){
+      return this.$store.state.instructions.main
+    },
+    title(){
+      return this.$store.state.title
+    },
+    description(){
+      return this.$store.state.description
+    }
   }
 }
 </script>
@@ -38,6 +48,18 @@ export default {
    html, body{
      height: 100%;
    }
+
+  h1{
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  p{
+    margin-bottom: 10px;
+    &.desc{
+      margin-bottom: 50px;
+    }
+  }
 
     body{
      display: flex;
