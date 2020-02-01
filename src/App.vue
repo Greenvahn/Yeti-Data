@@ -3,7 +3,7 @@
     <p>Load your file here</p>
     <input-loader @loadData="updateData"></input-loader>
     <!-- <button-launcher v-bind:dataFileName="fileName"@loadData="updateData"></button-launcher> -->
-    <table-render v-bind:dataTable="csvJSON"></table-render>
+    <table-render></table-render>
   </div>
 </template>
 
@@ -28,33 +28,6 @@ export default {
       }
     },
   computed: {
-      csvJSON () {
-          let csv = this.dataText.toString();
-          
-          var lines=csv.split("\n");
-
-          var result = [];
-
-          var headers=lines[0].split(",");
-
-          for(var i=1;i<lines.length;i++){
-
-            var obj = {};
-            var currentline=lines[i].split(",");
-
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-
-            result.push(obj);
-
-          }
-          
-          //return result; //JavaScript object
-          return csv;
-          //return JSON.stringify(result); //JSON
-      }
-      
     }
 }
 </script>
