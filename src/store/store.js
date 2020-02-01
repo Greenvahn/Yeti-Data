@@ -29,17 +29,19 @@ export const store = new Vuex.Store({
                 dataArray.push(rows[i].split(","));
             }
 
-            // mutates dataFile state wit dataArray values
+            // mutates dataFile state with dataArray values
             state.dataFile = dataArray;
         },
         showLaunch (state, payload){
-                state.showLaunch = payload
+           state.showLaunch = payload
         }
-
     },
     getters:{
         getTable(state){
             return state.dataFile
-        } 
+        },
+        getButton(state){
+            return state.showLaunch
+        }
     }
 })

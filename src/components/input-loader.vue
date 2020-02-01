@@ -6,9 +6,9 @@
            </div>
         </div>
         <div class="column">
-           <button class="button is-primary" @click="launchData">
+           <button class="button is-primary" @click="launchData" v-show="renderButton">
               <span class="icon is-small">
-                <font-awesome-icon icon="fa-pie-chart"></font-awesome-icon>
+                <font-awesome-icon icon="fa-chevron"></font-awesome-icon>
               </span>
               {{instruction}}
              </button>
@@ -24,28 +24,64 @@ export default {
     data(){
       return{
         selectedFile: '',
-        dataFile: ''
+        dataFile: '',
+        showLaunch: false
       }
     },
   methods: {
     loadFile(event) {
+      // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
+
+        // If TRUE, change button LAUNCH state
+        if(event.target.files[0]){
+          this.showLaunch = true;
+          this.$store.commit('showLaunch', this.showLaunch)
+        }
     },
+
     launchData(){
+
+      // Converts .csv file to plain text with JS FileReader
       const file = this.selectedFile
       const reader = new FileReader();
       reader.readAsText(file);
 
       reader.onload = (event) => {
-        
-        console.log(""+this.selectedFile.name+" CSV as text -->\n\n"+event.target.result);
-        this.$store.commit('loadDataFile', event.target.result)
-      }
+        //console.log(""+this.selectedFile.name+" CSV as text -->\n\n"+event.target.result);
+
+        //If reader successful
+        if(reader.result){
+
+            // commit data to the store
+            this.$store.commit('loadDataFile', event.target.result);
+
+            // change button LAUNCH state to FALSE after launch
+            this.showLaunch = false;
+            this.$store.commit('showLaunch', this.showLaunch)
+
+
+            // report
+            console.log("%cFileReader --> Successful.", "color:white; background-color:green");
+            console.log(reader.result);
+        }
+
+      },
+      // On error..
+      reader.onerror = function() {
+        console.log("%cFileReader --> could NOT read the file.", "color:white; background-color:red");
+      };
+
+    },
+    launchStateButton(){
     }
   },
   computed:{
     instruction(){
       return this.$store.state.instructions.button.toUpperCase();
+    },
+    renderButton(){
+      return this.$store.getters.getButton;
     }
   }
 }
