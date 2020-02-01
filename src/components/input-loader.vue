@@ -7,9 +7,6 @@
         </div>
         <div class="column">
            <button class="button is-primary" @click="launchData" v-show="renderButton">
-              <span class="icon is-small">
-                <font-awesome-icon icon="fa-chevron"></font-awesome-icon>
-              </span>
               {{instruction}}
              </button>
         </div>

@@ -2,7 +2,7 @@
   <div id="app">
   <div class="main">
     <h1>{{title}}</h1>
-    <p class="desc">{{description}}<a href="./sample/sample.csv" target="_blank">Here</a></p>
+    <p class="desc">{{description}}<a href="https://www.sample-videos.com/download-sample-csv.php" target="_blank">Here</a></p>
     <div class="message is-info">
       <div class="message-body">{{instruction}}</div>
     </div>
@@ -15,7 +15,6 @@
 <script>
 import inputLoader from './components/input-loader.vue'
 import tableRender from './components/table-render.vue'
-import * as d3 from "d3"
 
 export default {
   name: 'app',
