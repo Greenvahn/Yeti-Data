@@ -9,9 +9,15 @@
 <script>
 export default {
     name:'inputLoader',
+    data(){
+      return{
+        selectedFile: null
+      }
+    },
     methods: {
       onFileSelected(event) {
-        console.log(event.target.files);
+        console.log(event)
+        this.selectedFile = event.target.files[0]
       }
     }
 }
