@@ -8,6 +8,8 @@
 </template>
 
 <script>
+
+
 export default {
     name:'inputLoader',
     data(){
@@ -36,12 +38,11 @@ export default {
       const reader = new FileReader();
       reader.readAsText(file);
 
-      reader.onload = (event) => input.$emit("loadData", event.target.result);
-      reader.onload = (event) => console.log(""+this.selectedFile.name+" CSV as text -->\n\n"+event.target.result);
-
-      reader.onload = (event) => this.$store.commit('loadDataFile', event.target.result)
-      //this.$store.commit('loadDataFile', file)
-      
+      reader.onload = (event) => {
+        
+        console.log(""+this.selectedFile.name+" CSV as text -->\n\n"+event.target.result);
+        this.$store.commit('loadDataFile', event.target.result)
+      }
     }
   },
   computed:{

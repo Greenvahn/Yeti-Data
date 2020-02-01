@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div v-for="item in dataTable" v-bind:key="item.id">{{item}}</div>
+    <div>{{dataTable}}</div>
 </div>
 </template>
 
