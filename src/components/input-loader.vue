@@ -1,7 +1,7 @@
 <template>
       <div class="columns">
         <div class="column">
-           <input class="input is-small" type="file" @change="onFileSelected"/>
+           <input class="input is-small" type="file" @change="loadFile"/>
         </div>
       </div>
 </template>
@@ -11,15 +11,16 @@ export default {
     name:'inputLoader',
     data(){
       return{
-        selectedFile: null
+        selectedFile: ''
       }
     },
-    methods: {
-      onFileSelected(event) {
-        console.log(event)
-        this.selectedFile = event.target.files[0]
-      }
+  methods: {
+    loadFile(event) {
+      this.selectedFile = event.target.files[0];
+      console.log(event.target.files[0].name)
+      this.$emit('newFile', this.selectedFile);
     }
+  }
 }
 </script>
 
