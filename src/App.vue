@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <p>Load your file here</p>
-    <input-component></input-component>
+    <input-loader></input-loader>
   </div>
 </template>
 
 <script>
-import inputComponent from './components/input-component.vue'
+import inputLoader from './components/input-loader.vue'
 
 export default {
   name: 'app',
   components: {
-    inputComponent
+    inputLoader
   },
   data(){
       return{

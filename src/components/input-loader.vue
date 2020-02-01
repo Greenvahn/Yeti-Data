@@ -1,14 +1,19 @@
 <template>
       <div class="columns">
         <div class="column">
-           <input class="input is-small" type="file"/>
+           <input class="input is-small" type="file" @change="onFileSelected"/>
         </div>
       </div>
 </template>
 
 <script>
 export default {
-    name:'inputComponent',
+    name:'inputLoader',
+    methods: {
+      onFileSelected(event) {
+        console.log(event.target.files);
+      }
+    }
 }
 </script>
 
