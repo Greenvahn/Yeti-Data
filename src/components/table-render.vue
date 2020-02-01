@@ -7,6 +7,10 @@
 <script>
 export default {
     name: 'table-render',
-    props:['dataTable']
+    computed:{
+        dataTable(){
+        return this.$store.getters.getTable
+        }
+    }
 }
 </script>
