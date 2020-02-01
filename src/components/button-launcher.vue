@@ -1,16 +1,13 @@
 <template>
-           <button @click="launchData">Launch</button>
+  <button @click="launchData">Launch</button>
 </template>
 
 <script>
 export default {
     name:'button-launcher',
-    props: {
-      dataFileName:{
-        type: String,
-        required: true
-      }
-    },
+    props: [
+      "dataFileName"
+    ],
   methods: {
     launchData(){
 
@@ -19,8 +16,9 @@ export default {
       const reader = new FileReader();
       reader.readAsText(file);
 
-      reader.onload = (event) => this.$emit("loadData", event.target.result);
-      reader.onload = (event) => console.log(""+this.dataFileName.name+" CSV as text -->\n\n"+event.target.result);
+      reader.onload = (event) => this.$emit("loadData", event.target);
+      reader.onload = (event) => console.log(""+this.dataFileName.name+" CSV as text -->\n\n"+event.target);
+      
     }
   }
 }

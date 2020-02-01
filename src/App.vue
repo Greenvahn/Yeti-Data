@@ -1,54 +1,61 @@
 <template>
   <div id="app">
     <p>Load your file here</p>
-    <input-loader @newFile="updateFileName"></input-loader>
-    <button-launcher 
-      v-bind:dataFileName="fileName"
-      @loadData="updateData"
-    ></button-launcher>
-    <table-render></table-render>
+    <input-loader @loadData="updateData"></input-loader>
+    <!-- <button-launcher v-bind:dataFileName="fileName"@loadData="updateData"></button-launcher> -->
+    <table-render v-bind:dataTable="csvJSON"></table-render>
   </div>
 </template>
 
 <script>
 import inputLoader from './components/input-loader.vue'
-import buttonLauncher from './components/button-launcher.vue'
 import tableRender from './components/table-render.vue'
 
 export default {
   name: 'app',
   components: {
     inputLoader,
-    buttonLauncher,
     tableRender
   },
   data(){
       return{
-        fileName: "",
-        dataText: []
+        dataText: ""
       }
     },
     methods:{
-      updateFileName(value){
-        this.fileName = value;
-      },
       updateData(value){
-        this.dataText.push(value);
+        this.dataText = value;
       }
     },
   computed: {
+      csvJSON () {
+          let csv = this.dataText.toString();
+          
+          var lines=csv.split("\n");
 
-      uniqueItemsList: function(){
-        const types = [];
-        this.mediaList.forEach((item)=>{
-          if(!types.includes(item.type)){
-            types.push(item.type);
+          var result = [];
+
+          var headers=lines[0].split(",");
+
+          for(var i=1;i<lines.length;i++){
+
+            var obj = {};
+            var currentline=lines[i].split(",");
+
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+
+            result.push(obj);
+
           }
-        });
-        return types;
+          
+          //return result; //JavaScript object
+          return csv;
+          //return JSON.stringify(result); //JSON
       }
-
-  }
+      
+    }
 }
 </script>
 
