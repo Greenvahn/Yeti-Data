@@ -1,6 +1,6 @@
 # vue-dataDisplay
 
-Single-page application to load and display data made with [vue](https://vuejs.org/) and [bulma](https://bulma.io/bulma-start/).
+Single-page application to load and display data files formmated as [csv](https://en.wikipedia.org/wiki/Comma-separated_values).The app uses [vue](https://vuejs.org/), [vuex](https://vuex.vuejs.org/) and [bulma](https://bulma.io/bulma-start/).
 
 ## To Use
 
