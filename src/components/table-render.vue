@@ -18,7 +18,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .container.marging-top{margin-top: 75px;}
 .columns{
 
@@ -29,7 +28,6 @@ export default {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
-
 
             width: 20%;
             height: auto;
@@ -42,9 +40,6 @@ export default {
             border-right: 0.5px solid #999;
             cursor: pointer;
 
-
-            // border-left: 0.5px solid #999;
-
             &:first-child {border-left: none; border-right: 0.5px solid #999;}
             &:last-child {border-left: none; border-right: none;}
             &:hover{ background-color: #cff3e3;}
@@ -54,7 +49,6 @@ export default {
     &:nth-child(odd){
 	background-color: #f5f5f5;
     }
-
 
 }
 </style>

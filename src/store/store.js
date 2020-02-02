@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state:{
         title: 'Data display',
-        description: 'A single-page application to display your .csv files. Download an sample.csv file ',
+        description: 'A single-page application to display your .csv files.',
         instructions: {
             main: 'Start by loading your csv file. After that, press on "launch" button to display the data.',
             button: 'launch'

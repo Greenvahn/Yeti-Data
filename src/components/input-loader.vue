@@ -30,13 +30,13 @@ export default {
       // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
 
-        // If TRUE, change button LAUNCH state
+        // If TRUE, change button LAUNCH state --> (show)
         if(event.target.files[0]){
           this.showLaunch = true;
           this.$store.commit('showLaunch', this.showLaunch)
         }
-    },
 
+    },
     launchData(){
 
       // Converts .csv file to plain text with JS FileReader
@@ -45,15 +45,14 @@ export default {
       reader.readAsText(file);
 
       reader.onload = (event) => {
-        //console.log(""+this.selectedFile.name+" CSV as text -->\n\n"+event.target.result);
 
         //If reader successful
         if(reader.result){
 
-            // commit data to the store
+            // commit data to the store.js --> loadDataFile function
             this.$store.commit('loadDataFile', event.target.result);
 
-            // change button LAUNCH state to FALSE after launch
+            // change button LAUNCH state to FALSE after launch --> (hide)
             this.showLaunch = false;
             this.$store.commit('showLaunch', this.showLaunch)
 
@@ -64,13 +63,12 @@ export default {
         }
 
       },
+
       // On error..
       reader.onerror = function() {
         console.log("%cFileReader --> could NOT read the file.", "color:white; background-color:red");
       };
 
-    },
-    launchStateButton(){
     }
   },
   computed:{

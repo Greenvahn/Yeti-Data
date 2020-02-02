@@ -2,7 +2,7 @@
   <div id="app">
   <div class="main">
     <h1>{{title}}</h1>
-    <p class="desc">{{description}}<a href="https://www.sample-videos.com/download-sample-csv.php" target="_blank">Here</a></p>
+    <p class="desc">{{description}}</p>
     <div class="message is-info">
       <div class="message-body">{{instruction}}</div>
     </div>
@@ -22,21 +22,16 @@ export default {
     inputLoader,
     tableRender
   },
-  data(){
-      return{
-        loadData: {}
-      }
-    },
     methods:{
     },
   computed: {
-    instruction(){
+    instruction(){ // get instructions from the store.js
       return this.$store.state.instructions.main
     },
-    title(){
+    title(){ // get title from the store.js
       return this.$store.state.title
     },
-    description(){
+    description(){ // get description from the store.js
       return this.$store.state.description
     }
   }
@@ -46,6 +41,7 @@ export default {
 
 <style lang="scss">
    @import 'bulma';
+
    html, body{
      height: 100%;
    }
@@ -58,12 +54,11 @@ export default {
 
    #app{
      width: 100%;
-    //  max-height: 300px;
      height: 100%;
      margin: 0 auto;
 
         .main{
-             margin: 0 auto;
+            margin: 0 auto;
             width: 100%;
             height: 100%;
             max-width: 900px;
@@ -81,9 +76,7 @@ export default {
 
   p{
     margin-bottom: 10px;
-    &.desc{
-      margin-bottom: 50px;
-    }
+    &.desc{margin-bottom: 50px;}
   }
 
 </style>
