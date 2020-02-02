@@ -10,7 +10,7 @@ From your command line:
 
 ```bash
 # Clone this repository
-git clone https://github.com/greenvahn/vue-note-taking
+git clone https://github.com/Greenvahn/vue-dataDisplay.git
 # Go into the repository
 cd vue-dataDisplay
 # Install dependencies
