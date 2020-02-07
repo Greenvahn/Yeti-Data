@@ -17,6 +17,9 @@ export const store = new Vuex.Store({
     mutations:{
         loadDataFile (state, payload){
 
+            if(!payload){
+                state.dataFile = payload;
+            } else{
             // Creates empty array
             const dataArray = []
 
@@ -31,6 +34,11 @@ export const store = new Vuex.Store({
 
             // mutates dataFile state with dataArray values
             state.dataFile = dataArray;
+
+            }
+
+
+
         },
         showLaunch (state, payload){
            state.showLaunch = payload

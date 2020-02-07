@@ -6,7 +6,7 @@
            </div>
         </div>
         <div class="column">
-           <button class="button is-primary" @click="launchData" v-show="renderButton">
+           <button class="button is-primary" @click="launchData" v-if="renderButton">
               {{instruction}}
              </button>
         </div>
@@ -27,12 +27,17 @@ export default {
     },
   methods: {
     loadFile(event) {
+
+      // Empties table -- Sets to null the data file from the store --> hides table
+      this.$store.commit('loadDataFile', null);  
+
       // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
 
+        console.log("%cFileReader --> event.target", "color:black; background-color:orange", event.target.files[0])
         
-        // If TRUE
-        if(event.target.files[0]){
+        // If TRUE - file loaded
+        if(this.selectedFile){
 
         // 1 – change button LAUNCH state --> (show)
           this.showLaunch = true;
