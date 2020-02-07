@@ -65,7 +65,7 @@ animation: fadeIn .6s;
 }
 
 .fadeIn-leave-active{
-animation: fadeIn .6s reverse;
+animation: fadeIn .4s reverse;
 }
 
 
