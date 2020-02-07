@@ -12,11 +12,11 @@ export const store = new Vuex.Store({
             button: 'launch'
         },
         showLaunch: false,
-        dataFile: null
+        dataFile: null,
     },
     mutations:{
         loadDataFile (state, payload){
-            
+
             // Creates empty array
             const dataArray = []
 

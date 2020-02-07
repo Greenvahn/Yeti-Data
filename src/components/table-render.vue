@@ -1,14 +1,21 @@
 <template>
-<div class="container marging-top">
-    <div v-for="item in dataTable" v-bind:key="item[0]" class="columns with-border">
-        <div v-for="element in item" v-bind:key="element" class="row-table">{{element}}</div>
-    </div>
-</div>
+  <transition name="fadeIn">
+        <div v-if="dataTable" class="container marging-top">
+            <div v-for="item in dataTable" v-bind:key="item[0]" class="columns with-border">
+                <div v-for="element in item" v-bind:key="element" class="row-table">{{element}}</div>
+            </div>
+        </div>
+  </transition>
 </template>
 
 <script>
 export default {
     name: 'table-render',
+    data(){
+        return{
+            show: false
+        }
+    },
     computed:{
         dataTable(){
         return this.$store.getters.getTable
@@ -50,5 +57,26 @@ export default {
 	background-color: #f5f5f5;
     }
 
+}
+
+/* Table animation */
+.fadeIn-enter-active{
+animation: fadeIn .6s; 
+}
+
+.fadeIn-leave-active{
+animation: fadeIn .6s reverse;
+}
+
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+    margin-top: -10px;
+  }
+  100%{
+    opacity: 1;
+     margin-top: 75px;
+  }
 }
 </style>

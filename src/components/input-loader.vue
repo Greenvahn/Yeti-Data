@@ -21,7 +21,7 @@ export default {
     data(){
       return{
         selectedFile: '',
-        dataFile: '',
+        dataFile: null,
         showLaunch: false
       }
     },
@@ -30,11 +30,15 @@ export default {
       // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
 
-        // If TRUE, change button LAUNCH state --> (show)
+        
+        // If TRUE
         if(event.target.files[0]){
+
+        // 1 – change button LAUNCH state --> (show)
           this.showLaunch = true;
-          this.$store.commit('showLaunch', this.showLaunch)
+          this.$store.commit('showLaunch', this.showLaunch);
         }
+
 
     },
     launchData(){
