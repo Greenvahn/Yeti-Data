@@ -114,4 +114,8 @@ input[type="file"] {
 .file-name {
   font-weight: bold;
 }
+
+.file-icon {
+  width: 2em !important;
+}
 </style>

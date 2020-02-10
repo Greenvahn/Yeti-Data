@@ -4,10 +4,10 @@ import { store } from './store/store.js'
 
 //Font awesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faCloudUploadAlt, faFileImport } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee, faCloudUploadAlt)
+library.add(faCoffee, faCloudUploadAlt, faFileImport)
 
 // Register the VUE component globally
 Vue.component('font-awesome-icon', FontAwesomeIcon)
