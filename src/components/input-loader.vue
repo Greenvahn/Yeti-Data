@@ -1,121 +1,117 @@
 <template>
-      <div class="columns">
-        <div class="column is-four-fifths">
-          <div class="file has-name is-right">
-            <label class="file-label">
-              <input class="input" type="file" v-on:change="loadFile"/>
-              <span class="file-cta">
-                <span class="file-label">
-                  Browse
-                </span>
-              </span>
-              <span class="file-name">
-                {{fileName}}
-              </span>
-            </label>
-          </div>
-          <!-- <div class="control">
-               <input class="input" type="file" v-on:change="loadFile"/>
-          </div> -->
-        </div>
-        <div class="column">
-           <button class="button is-primary" @click="launchData" v-if="renderButton">
-              {{instruction}}
-             </button>
-        </div>
+  <div class="columns">
+    <div class="column is-four-fifths">
+      <div class="file has-name is-right is-fullwidth">
+        <label class="file-label">
+          <input class="input" type="file" v-on:change="loadFile" />
+          <span class="file-cta">
+            <span class="file-icon">
+              <font-awesome-icon icon="cloud-upload-alt" />
+            </span>
+            <span class="file-label">Browse</span>
+          </span>
+          <span class="file-name">{{fileName}}</span>
+        </label>
       </div>
+      <!-- <div class="control">
+               <input class="input" type="file" v-on:change="loadFile"/>
+      </div>-->
+    </div>
+    <div class="column">
+      <button class="button is-primary" @click="launchData" v-if="renderButton">{{instruction}}</button>
+    </div>
+  </div>
 </template>
 
 <script>
-
-
 export default {
-    name:'inputLoader',
-    data(){
-      return{
-        selectedFile: '',
-        fileName: 'No file chosen...',
-        dataFile: null,
-        showLaunch: false
-      }
-    },
+  name: "inputLoader",
+  data() {
+    return {
+      selectedFile: "",
+      fileName: "No file chosen...",
+      dataFile: null,
+      showLaunch: false
+    };
+  },
   methods: {
     loadFile(event) {
-
       // Empties table -- Sets to null the data file from the store --> hides table
-      this.$store.commit('loadDataFile', null);  
+      this.$store.commit("loadDataFile", null);
 
       // Updates the file name on input onChange
-      this.fileName = event.target.files[0].name
+      this.fileName = event.target.files[0].name;
 
       // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
 
-       console.log("%cFileReader --> event.target", "color:black; background-color:orange", event.target.files[0])
-        
-        // If TRUE - file loaded
-        if(this.selectedFile){
+      console.log(
+        "%cFileReader --> event.target",
+        "color:black; background-color:orange",
+        event.target.files[0]
+      );
 
+      // If TRUE - file loaded
+      if (this.selectedFile) {
         // 1 – change button LAUNCH state --> (show)
-          this.showLaunch = true;
-          this.$store.commit('showLaunch', this.showLaunch);
-        }
-
-
+        this.showLaunch = true;
+        this.$store.commit("showLaunch", this.showLaunch);
+      }
     },
-    launchData(){
-
+    launchData() {
       // Converts .csv file to plain text with JS FileReader
-      const file = this.selectedFile
+      const file = this.selectedFile;
       const reader = new FileReader();
       reader.readAsText(file);
 
-      reader.onload = (event) => {
-
+      (reader.onload = event => {
         //If reader successful
-        if(reader.result){
+        if (reader.result) {
+          // commit data to the store.js --> loadDataFile function
+          this.$store.commit("loadDataFile", event.target.result);
 
-            // commit data to the store.js --> loadDataFile function
-            this.$store.commit('loadDataFile', event.target.result);
+          // change button LAUNCH state to FALSE after launch --> (hide)
+          this.showLaunch = false;
+          this.$store.commit("showLaunch", this.showLaunch);
 
-            // change button LAUNCH state to FALSE after launch --> (hide)
-            this.showLaunch = false;
-            this.$store.commit('showLaunch', this.showLaunch)
-
-
-            // report
-            console.log("%cFileReader --> Successful.", "color:white; background-color:green");
-            console.log(reader.result);
+          // report
+          console.log(
+            "%cFileReader --> Successful.",
+            "color:white; background-color:green"
+          );
+          console.log(reader.result);
         }
-
-      },
-
-      // On error..
-      reader.onerror = function() {
-        console.log("%cFileReader --> could NOT read the file.", "color:white; background-color:red");
-      };
-
+      }),
+        // On error..
+        (reader.onerror = function() {
+          console.log(
+            "%cFileReader --> could NOT read the file.",
+            "color:white; background-color:red"
+          );
+        });
     }
   },
-  computed:{
-    instruction(){
+  computed: {
+    instruction() {
       return this.$store.state.instructions.button.toUpperCase();
     },
-    renderButton(){
+    renderButton() {
       return this.$store.getters.getButton;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-
-input[type=file]{
-  display: none
+input[type="file"] {
+  display: none;
 }
 
-.container{
-    max-width: 500px
+.container {
+  max-width: 500px;
 }
 
+.file-name {
+  font-weight: bold;
+}
 </style>
