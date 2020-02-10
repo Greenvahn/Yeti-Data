@@ -1,9 +1,22 @@
 <template>
       <div class="columns">
         <div class="column is-four-fifths">
-          <div class="control">
-           <input class="input" type="file" v-on:change="loadFile"/>
-           </div>
+          <div class="file has-name is-right">
+            <label class="file-label">
+              <input class="input" type="file" v-on:change="loadFile"/>
+              <span class="file-cta">
+                <span class="file-label">
+                  Browse
+                </span>
+              </span>
+              <span class="file-name">
+                {{fileName}}
+              </span>
+            </label>
+          </div>
+          <!-- <div class="control">
+               <input class="input" type="file" v-on:change="loadFile"/>
+          </div> -->
         </div>
         <div class="column">
            <button class="button is-primary" @click="launchData" v-if="renderButton">
@@ -21,6 +34,7 @@ export default {
     data(){
       return{
         selectedFile: '',
+        fileName: 'No file chosen...',
         dataFile: null,
         showLaunch: false
       }
@@ -31,10 +45,13 @@ export default {
       // Empties table -- Sets to null the data file from the store --> hides table
       this.$store.commit('loadDataFile', null);  
 
+      // Updates the file name on input onChange
+      this.fileName = event.target.files[0].name
+
       // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
 
-        console.log("%cFileReader --> event.target", "color:black; background-color:orange", event.target.files[0])
+       console.log("%cFileReader --> event.target", "color:black; background-color:orange", event.target.files[0])
         
         // If TRUE - file loaded
         if(this.selectedFile){
@@ -92,7 +109,13 @@ export default {
 </script>
 
 <style lang="scss">
+
+input[type=file]{
+  display: none
+}
+
 .container{
     max-width: 500px
 }
+
 </style>
