@@ -1,9 +1,11 @@
 <template>
   <transition name="fadeIn">
         <div v-if="dataTable" class="container marging-top">
-            <div v-for="item in dataTable" v-bind:key="item[0]" class="columns with-border">
-                <div v-for="element in item" v-bind:key="element" class="row-table">{{element}}</div>
-            </div>
+            <table>
+                <tr v-for="item in dataTable" v-bind:key="item[0]">
+                    <td v-for="element in item" v-bind:key="element">{{element}}</td>
+                </tr>
+            </table>
         </div>
   </transition>
 </template>
@@ -26,38 +28,63 @@ export default {
 
 <style lang="scss">
 .container.marging-top{margin-top: 75px;}
-.columns{
 
-    &.with-border{
-        border: 1px solid #999;
+table{
+    border: 1px solid #999;
+    background: white;
+    width: 100%;
+    tr{
+        border-bottom: 1px solid #cecece;
+        &:nth-child(odd){
+            background-color: #f5f5f5;
+        }
 
-        .row-table{
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-
-            width: 20%;
-            height: auto;
-            max-width: 124px;
-            max-height: 100px;
-            font-size: 12px;
-            padding: 2px;
-
-            font-size: 12px;
-            border-right: 0.5px solid #999;
-            cursor: pointer;
-
-            &:first-child {border-left: none; border-right: 0.5px solid #999;}
-            &:last-child {border-left: none; border-right: none;}
+        td{
+        font-size: 12px;
+        border-right: 0.5px solid #cecece;
+        padding: 5px;
+        cursor: pointer;
+            &:first-child {border-left: none; border-right: 0.5px solid #cecece}
+            // &:last-child {border-left: none; border-right: none;}
             &:hover{ background-color: #cff3e3;}
         }
-    }
 
-    &:nth-child(odd){
-	background-color: #f5f5f5;
-    }
+        
 
+    }
 }
+// .columns{
+
+//     &.with-border{
+//         border: 1px solid #999;
+
+//         .row-table{
+//             display: flex;
+//             flex-direction: row;
+//             justify-content: flex-start;
+
+//             width: 20%;
+//             height: auto;
+//             max-width: 124px;
+//             max-height: 100px;
+//             font-size: 12px;
+//             padding: 2px;
+
+//             font-size: 12px;
+//             border-right: 0.5px solid #999;
+//             cursor: pointer;
+
+//             &:first-child {border-left: none; border-right: 0.5px solid #999;}
+//             &:last-child {border-left: none; border-right: none;}
+//             &:hover{ background-color: #cff3e3;}
+//         }
+//     }
+
+//     &:nth-child(odd){
+// 	background-color: #f5f5f5;
+//     }
+
+// }
 
 /* Table animation */
 .fadeIn-enter-active{
