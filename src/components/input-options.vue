@@ -3,13 +3,13 @@
     <div class="column is-four-fifths has-margin-10">
       <div class="columns">
         <div class="column is-2">
-          <b> {{loadingOptions}}</b>
+          <b>{{loadingOptions}}</b>
         </div>
         <div class="column is-10">
           <div class="columns">
-            <div v-for="item in renderOptions" v-bind:key="item[0]" class="column is-3">
+            <div v-for="(item, index) in renderOptions" v-bind:key="index" class="column is-3">
               <label class="checkbox">
-                <input type="checkbox" />
+                <input type="checkbox" v-model="item.toggle"/>
                 {{item.text}}
               </label>
             </div>
@@ -27,13 +27,14 @@ export default {
   data() {
     return {
       loadingOptions: "Options: ",
-      headerRow: "Header row",
-      dynamicTyping: "Dynamic typing"
     };
   },
-  computed:{
-    renderOptions(){
-          return this.$store.getters.getInputOptions
+  methods:{
+
+  },
+  computed: {
+    renderOptions() {
+      return this.$store.getters.getInputOptions;
     }
   }
 };
@@ -42,7 +43,11 @@ export default {
 <style lang="scss">
 .options-wrap {
   margin-bottom: 10px;
-  .is-grey {background-color: #f7f7f7;}
-  .has-margin-10{margin: 0 10px;}
+  .is-grey {
+    background-color: #f7f7f7;
+  }
+  .has-margin-10 {
+    margin: 0 10px;
+  }
 }
 </style>

@@ -63,6 +63,7 @@ export const store = new Vuex.Store({
         },
         getInputOptions(state){
             return state.inputOptions
-        }
+        },
+
     }
 })

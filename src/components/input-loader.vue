@@ -43,7 +43,6 @@ export default {
     return {
       selectedFile: "",
       fileName: "No file chosen...",
-      headerRow: "it has Header row",
       dataFile: null,
       showLaunch: false
     };

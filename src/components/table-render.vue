@@ -2,8 +2,8 @@
   <transition name="fadeIn">
         <div v-if="dataTable" class="container marging-top">
             <table>
-                <tr v-for="item in dataTable" v-bind:key="item[0]">
-                    <td v-for="element in item" v-bind:key="element">{{element}}</td>
+                <tr v-for="(item, index) in dataTable" v-bind:key="index" v-bind:class="{headerRow : checkHeaderRow('Header row', index)}">
+                    <td v-for="(element, index) in item" v-bind:key="index">{{element}}</td>
                 </tr>
             </table>
         </div>
@@ -16,6 +16,27 @@ export default {
     data(){
         return{
             show: false
+        }
+    },
+    methods:{
+        checkHeaderRow(nameOption, index){
+            // nameOtion --> parse the input option name from the store
+
+            // Get options array from the store
+            const options = this.$store.getters.getInputOptions
+
+            // Define input attribute check false by default
+            let isCheck = false;
+
+            // Loop through all the otpions from the store get the attribut check from the option parsed
+            for(let i = 0; i < options.length; i++){
+                if(options[i].text == nameOption){
+                    isCheck = options[i].isCheck
+                }
+            }
+
+            // Check if is the first line of the table and the option has been checked.
+            return (index === 0 ? isCheck : false)
         }
     },
     computed:{
@@ -49,7 +70,9 @@ table{
             &:hover{ background-color: #cff3e3;}
         }
 
-        
+        &.headerRow{
+            border: 10px solid #000;
+        }
 
     }
 }
