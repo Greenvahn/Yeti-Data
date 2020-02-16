@@ -7,16 +7,10 @@
         </div>
         <div class="column is-10">
           <div class="columns">
-            <div class="column is-3">
+            <div v-for="item in renderOptions" v-bind:key="item[0]" class="column is-3">
               <label class="checkbox">
                 <input type="checkbox" />
-                {{headerRow}}
-              </label>
-            </div>
-            <div class="column is-3">
-              <label class="checkbox">
-                <input type="checkbox" />
-                {{dynamicTyping}}
+                {{item.text}}
               </label>
             </div>
           </div>
@@ -36,6 +30,11 @@ export default {
       headerRow: "Header row",
       dynamicTyping: "Dynamic typing"
     };
+  },
+  computed:{
+    renderOptions(){
+          return this.$store.getters.getInputOptions
+    }
   }
 };
 </script>

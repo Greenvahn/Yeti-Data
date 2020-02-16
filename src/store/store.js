@@ -11,6 +11,16 @@ export const store = new Vuex.Store({
             main: 'Start by loading your csv file. After that, press on "launch" button to display the data.',
             button: 'launch'
         },
+        inputOptions:[
+            {
+                text: 'Header row',
+                isCheck: false
+            },
+            {
+                text: 'Dynamic typing',
+                isCheck: false
+            }
+        ],
         showLaunch: false,
         dataFile: null,
     },
@@ -50,6 +60,9 @@ export const store = new Vuex.Store({
         },
         getButton(state){
             return state.showLaunch
+        },
+        getInputOptions(state){
+            return state.inputOptions
         }
     }
 })
