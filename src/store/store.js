@@ -4,14 +4,14 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    state:{
+    state: {
         title: 'Data display',
         description: 'A single-page application to display your .csv files.',
         instructions: {
             main: 'Start by loading your csv file. After that, press on "launch" button to display the data.',
             button: 'launch'
         },
-        inputOptions:[
+        inputOptions: [
             {
                 text: 'Header row',
                 isCheck: false
@@ -24,44 +24,50 @@ export const store = new Vuex.Store({
         showLaunch: false,
         dataFile: null,
     },
-    mutations:{
-        loadDataFile (state, payload){
+    mutations: {
+        loadDataFile(state, payload) {
 
-            if(!payload){
+            if (!payload) {
                 state.dataFile = payload;
-            } else{
-            // Creates empty array
-            const dataArray = []
+            } else {
+                // Creates empty array
+                const dataArray = []
 
-            // Lets split the data by rows
-            let rows =  payload.split("\n");
+                // Lets split the data by rows
+                let rows = payload.split("\n");
 
-            // iterate through the rows
-            for (var i = 0; i < rows.length; i++) {
-                // push each element into dataArray
-                dataArray.push(rows[i].split(","));
+                // iterate through the rows
+                for (var i = 0; i < rows.length; i++) {
+                    // push each element into dataArray
+                    dataArray.push(rows[i].split(","));
+                }
+
+                // mutates dataFile state with dataArray values
+                state.dataFile = dataArray;
+
             }
-
-            // mutates dataFile state with dataArray values
-            state.dataFile = dataArray;
-
-            }
-
-
 
         },
-        showLaunch (state, payload){
-           state.showLaunch = payload
+        showLaunch(state, payload) {
+            state.showLaunch = payload
+        },
+        updateOptions(state, payload) {
+            const allOptions = state.inputOptions;
+                for (let i = 0; i <= allOptions.length; i++) {
+                    if (allOptions[i].text == payload.text) {
+                        allOptions[i].isCheck = payload.value
+                    }
+                }
         }
     },
-    getters:{
-        getTable(state){
+    getters: {
+        getTable(state) {
             return state.dataFile
         },
-        getButton(state){
+        getButton(state) {
             return state.showLaunch
         },
-        getInputOptions(state){
+        getInputOptions(state) {
             return state.inputOptions
         },
 

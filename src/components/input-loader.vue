@@ -1,7 +1,7 @@
 <template>
 <div class="launcher">
 
-    <options-loader></options-loader>
+    <options-loader v-if="renderButton"></options-loader>
 
     <div class="columns">
       <div class="column is-four-fifths">
