@@ -1,35 +1,49 @@
 <template>
-  <div class="columns">
-    <div class="column is-four-fifths">
-      <div class="file has-name is-right is-fullwidth">
-        <label class="file-label">
-          <input class="input" type="file" v-on:change="loadFile" />
-          <span class="file-cta">
-            <span class="file-icon">
-              <font-awesome-icon icon="cloud-upload-alt" />
+<div class="launcher">
+
+    <options-loader></options-loader>
+
+    <div class="columns">
+      <div class="column is-four-fifths">
+        <div class="file has-name is-right is-fullwidth">
+          <label class="file-label">
+            <input class="input" type="file" v-on:change="loadFile" />
+            <span class="file-cta">
+              <span class="file-icon">
+                <font-awesome-icon icon="cloud-upload-alt" />
+              </span>
+              <span class="file-label">Browse</span>
             </span>
-            <span class="file-label">Browse</span>
-          </span>
-          <span class="file-name">{{fileName}}</span>
-        </label>
+            <span class="file-name">{{fileName}}</span>
+          </label>
+        </div>
       </div>
-      <!-- <div class="control">
-               <input class="input" type="file" v-on:change="loadFile"/>
-      </div>-->
+      <div class="column is-one-fifths">
+        <button
+          class="button is-primary"
+          @click="launchData"
+          v-if="renderButton"
+        >{{instruction}}</button>
+      </div>
     </div>
-    <div class="column">
-      <button class="button is-primary" @click="launchData" v-if="renderButton">{{instruction}}</button>
-    </div>
-  </div>
+
+</div>
 </template>
 
 <script>
+// Import options from external component
+import optionsLoader from "./input-options.vue";
+
 export default {
   name: "inputLoader",
+  components: {
+    optionsLoader
+  },
   data() {
     return {
       selectedFile: "",
       fileName: "No file chosen...",
+      headerRow: "it has Header row",
       dataFile: null,
       showLaunch: false
     };
@@ -103,6 +117,10 @@ export default {
 </script>
 
 <style lang="scss">
+.launcher{
+  margin-top: 50px;
+}
+
 input[type="file"] {
   display: none;
 }
@@ -112,7 +130,7 @@ input[type="file"] {
 }
 
 .file-name {
-  font-weight: bold;
+  //font-weight: bold;
 }
 
 .file-icon {
