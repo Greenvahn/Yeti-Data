@@ -13,12 +13,19 @@ export const store = new Vuex.Store({
         },
         inputOptions: [
             {
-                name: 'Header row',
+                name: 'has header',
                 isCheck: false
             },
             {
-                name: 'Dynamic typing',
+                name: 'check data',
                 isCheck: false
+            }
+        ],
+        messages: [
+            {
+                id: 'msg0',
+                msg: 'The CSV has empty cells. It could be missing data.',
+                isActive: false
             }
         ],
         showLaunch: false,
@@ -30,19 +37,47 @@ export const store = new Vuex.Store({
             if (!payload) {
                 state.dataFile = payload;
             } else {
+                // Retrieves all options
+                const allOptions = state.inputOptions;
+
                 // Creates empty array
                 const dataArray = []
+
+                // Validation - defined maximun items in row
+                let maxItemsRow = 0;
+
+                // Check if validation is active
+                let isValidationActive = (options, target) => {
+                    let _isVal;
+                    options.map(opt => opt.name === target && opt.isCheck 
+                        ? _isVal = true : _isVal = false);
+                    return _isVal;
+                }
 
                 // Lets split the data by rows
                 let rows = payload.split("\n");
 
                 // iterate through the rows
                 for (var i = 0; i < rows.length; i++) {
-                    // push each element into dataArray
+
+                    // split each cell
                     dataArray.push(rows[i].split(","));
+
+                    if (isValidationActive(allOptions, 'check data')) {
+                        dataArray.forEach(row => {
+                            if (row.length >= maxItemsRow) {
+                                maxItemsRow = row.length
+                            } else {
+                                console.warn('There are empty cells. Max number of cells are ' + maxItemsRow)
+                                //console.log('%c There are empty cells. Max number of cells are ' + maxItemsRow+' ', 'background:orange; color:white')
+                            }
+                        })
+                    }
+
                 }
 
                 // mutates dataFile state with dataArray values
+                console.table(dataArray);
                 state.dataFile = dataArray;
 
             }
@@ -70,6 +105,8 @@ export const store = new Vuex.Store({
         getInputOptions(state) {
             return state.inputOptions
         },
-
+        getMessage(state) {
+            return state.messages
+        }
     }
 })

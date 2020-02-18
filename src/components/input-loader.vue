@@ -92,7 +92,7 @@ export default {
             "%cFileReader --> Successful.",
             "color:white; background-color:green"
           );
-          console.log(reader.result);
+          console.table(reader.result);
         }
       }),
         // On error..
