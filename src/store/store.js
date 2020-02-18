@@ -13,11 +13,11 @@ export const store = new Vuex.Store({
         },
         inputOptions: [
             {
-                text: 'Header row',
+                name: 'Header row',
                 isCheck: false
             },
             {
-                text: 'Dynamic typing',
+                name: 'Dynamic typing',
                 isCheck: false
             }
         ],
@@ -53,11 +53,11 @@ export const store = new Vuex.Store({
         },
         updateOptions(state, payload) {
             const allOptions = state.inputOptions;
-                for (let i = 0; i <= allOptions.length; i++) {
-                    if (allOptions[i].text == payload.text) {
-                        allOptions[i].isCheck = payload.value
-                    }
+            for (let i = 0; i < allOptions.length; i++) {
+                if (allOptions[i].name == payload.name) {
+                    allOptions[i].isCheck = payload.value
                 }
+            }
         }
     },
     getters: {

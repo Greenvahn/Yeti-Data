@@ -9,8 +9,12 @@
           <div class="columns">
             <div v-for="(item, index) in renderOptions" v-bind:key="index" class="column is-3">
               <label class="checkbox">
-                <input type="checkbox" v-on:change="commitValue(item.text, item.value)" v-model="item.value"/>
-                {{item.text}}
+                <input
+                  type="checkbox"
+                  v-on:change="commitValue(item.name, item.value)"
+                  v-model="item.value"
+                />
+                {{item.name}}
               </label>
             </div>
           </div>
@@ -26,12 +30,12 @@ export default {
   name: "optionsLoader",
   data() {
     return {
-      loadingOptions: "Options: ",
+      loadingOptions: "Options: "
     };
   },
-  methods:{
-    commitValue(text, value){
-        this.$store.commit("updateOptions", {text, value});
+  methods: {
+    commitValue(name, value) {
+      this.$store.commit("updateOptions", { name, value });
     }
   },
   computed: {

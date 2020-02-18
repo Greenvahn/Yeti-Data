@@ -28,9 +28,9 @@ export default {
             // Define input attribute check false by default
             let isCheck = false;
 
-            // Loop through all the otpions from the store get the attribut check from the option parsed
+            // Loop through all the inputOtpions from the store get the attribute check from the option parsed
             for(let i = 0; i < options.length; i++){
-                if(options[i].text == nameOption){
+                if(options[i].name == nameOption){
                     isCheck = options[i].isCheck
                 }
             }
@@ -71,7 +71,10 @@ table{
         }
 
         &.headerRow{
-            border: 10px solid #000;
+            background-color: #8effcc;
+            columns: #000;
+            border-bottom: 5px solid #000;
+            font-weight: bold;
         }
 
     }
