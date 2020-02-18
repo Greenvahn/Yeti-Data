@@ -2,7 +2,7 @@
   <transition name="fadeIn">
         <div v-if="dataTable" class="container marging-top">
             <table>
-                <tr v-for="(item, index) in dataTable" v-bind:key="index" v-bind:class="{headerRow : checkHeaderRow('Header row', index)}">
+                <tr v-for="(item, index) in dataTable" v-bind:key="index" v-bind:class="{headerRow : checkHeaderRow('has header', index)}">
                     <td v-for="(element, index) in item" v-bind:key="index">{{element}}</td>
                 </tr>
             </table>
