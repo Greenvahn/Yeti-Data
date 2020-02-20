@@ -29,11 +29,11 @@ export default {
             let isCheck = false;
 
             // Loop through all the inputOtpions from the store get the attribute check from the option parsed
-            for(let i = 0; i < options.length; i++){
-                if(options[i].name == nameOption){
-                    isCheck = options[i].isCheck
+            options.forEach(option => { 
+                if(option.name == nameOption){
+                    isCheck = option.isCheck
                 }
-            }
+            });
 
             // Check if is the first line of the table and the option has been checked.
             return (index === 0 ? isCheck : false)

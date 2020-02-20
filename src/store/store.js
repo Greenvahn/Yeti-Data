@@ -54,6 +54,17 @@ export const store = new Vuex.Store({
                     return _isVal;
                 }
 
+                // let isValidationActive = (_options, target) =>{
+                //     let isVal;
+                //     _options.forEach(option =>{
+                //         let isVal = option.name === target && option.isCheck ? true : false;
+                //     })
+
+                //     return isVal; // UNDEFINED
+                // }
+
+                console.log("--------------------->", isValidationActive(allOptions, 'check data'))
+
                 // Lets split the data by rows
                 let rows = payload.split("\n");
 
