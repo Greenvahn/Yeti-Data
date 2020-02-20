@@ -47,21 +47,21 @@ export const store = new Vuex.Store({
                 let maxItemsRow = 0;
 
                 // Check if validation is active
-                let isValidationActive = (options, target) => {
-                    let _isVal;
-                    options.map(opt => opt.name === target && opt.isCheck 
-                        ? _isVal = true : _isVal = false);
-                    return _isVal;
-                }
-
-                // let isValidationActive = (_options, target) =>{
-                //     let isVal;
-                //     _options.forEach(option =>{
-                //         let isVal = option.name === target && option.isCheck ? true : false;
-                //     })
-
-                //     return isVal; // UNDEFINED
+                // let isValidationActive = (options, target) => {
+                //     let _isVal;
+                //     options.map(opt => opt.name === target && opt.isCheck 
+                //         ? _isVal = true : _isVal = false);
+                //     return _isVal;
                 // }
+
+                let isValidationActive = (_options, target) =>{
+                    let isVal;
+                    _options.forEach(option =>{
+                       isVal = option.name === target && option.isCheck ? true : false;
+                    })
+
+                    return isVal; 
+                }
 
                 console.log("--------------------->", isValidationActive(allOptions, 'check data'))
 
