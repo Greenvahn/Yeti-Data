@@ -47,36 +47,70 @@ export const store = new Vuex.Store({
                 let maxItemsRow = 0;
 
                 // Check if validation is active
-                let isValidationActive = (_options, target) =>{
+                const validateCells = (_data, _options, target) =>{
                     let isVal;
                     _options.forEach(option =>{
                        isVal = option.name === target && option.isCheck ? true : false;
                     })
 
-                    return isVal; 
+                    if(isVal){
+                        _data.forEach(row => {
+                            row.length >= maxItemsRow ?
+                            maxItemsRow = row.length : console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow)
+                        })
+                    } else{
+                        console.log("%c Validation has NOT been activated ", "color:black; background: orange")
+                    }
                 }
 
                 // Lets split the data by rows
                 let rows = payload.split("\n");
 
+                // Filter empty rows or null values
+                rows = rows.filter(item => {
+                    return (item != null || item != "")
+                })
+
+
                 // iterate through the rows
-                for (var i = 0; i < rows.length; i++) {
+                rows.forEach((cell, index) => {
 
-                    // split each cell
-                    dataArray.push(rows[i].split(","));
 
-                    if (isValidationActive(allOptions, 'check data')) {
-                        dataArray.forEach(row => {
-                            if (row.length >= maxItemsRow) {
-                                maxItemsRow = row.length
-                            } else {
-                                console.warn('There are empty cells. Max number of cells are ' + maxItemsRow)
-                                //console.log('%c There are empty cells. Max number of cells are ' + maxItemsRow+' ', 'background:orange; color:white')
-                            }
-                        })
+                    // make it a string for Regex
+                    let _cell= cell.toString();
+
+                    console.log("before"+index, _cell);
+
+                    // Includes commas inside of double quotes
+                    _cell = _cell.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
+                    /* will match:
+                        (
+                            ".*?"       double quotes + anything but double quotes + double quotes
+                            |           OR
+                            [^",\s]+    1 or more characters excl. double quotes or comma
+                        )
+                        (?=             FOLLOWED BY
+                            \s*,        0 or more empty spaces and a comma
+                            |           OR
+                            \s*$        0 or more empty spaces and nothing else (end of string)
+                        )
+
+                    */
+
+                    // Do not push if cell is null
+                    if(_cell != null){
+
+                        console.log("item"+index, _cell);
+
+                        // push the data cell
+                        dataArray.push(_cell);
                     }
 
-                }
+
+                })
+
+                validateCells(dataArray, allOptions, 'check data');
+
 
                 // mutates dataFile state with dataArray values
                 console.table(dataArray);
@@ -92,7 +126,7 @@ export const store = new Vuex.Store({
             const allOptions = state.inputOptions;
 
             allOptions.forEach(option =>{
-                option.name === payload.name ? 
+                option.name === payload.name ?
                 option.isCheck = payload.value : option.isCheck
             })
         }
@@ -110,7 +144,7 @@ export const store = new Vuex.Store({
         getMessage(state) {
             return state.messages
         }
-    }, 
+    },
      actions :{
         addFile(context, payload){
             context.commit('loadDataFile', payload);
