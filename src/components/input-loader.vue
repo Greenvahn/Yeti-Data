@@ -50,7 +50,8 @@ export default {
   methods: {
     loadFile(event) {
       // Empties table -- Sets to null the data file from the store --> hides table
-      this.$store.commit("loadDataFile", null);
+      // * Call action 'addFile' from the store
+      this.$store.dispatch('addFile', null);
 
       // Updates the file name on input onChange
       this.fileName = event.target.files[0].name;
@@ -67,8 +68,7 @@ export default {
       // If TRUE - file loaded
       if (this.selectedFile) {
         // 1 – change button LAUNCH state --> (show)
-        this.showLaunch = true;
-        this.$store.commit("showLaunch", this.showLaunch);
+        this.$store.dispatch("addLaunchBtn", this.showLaunch = true);
       }
     },
     launchData() {
@@ -81,11 +81,10 @@ export default {
         //If reader successful
         if (reader.result) {
           // commit data to the store.js --> loadDataFile function
-          this.$store.commit("loadDataFile", event.target.result);
+          this.$store.dispatch('addFile', event.target.result);
 
           // change button LAUNCH state to FALSE after launch --> (hide)
-          this.showLaunch = false;
-          this.$store.commit("showLaunch", this.showLaunch);
+          this.$store.dispatch('addLaunchBtn', this.showLaunch = false);
 
           // report
           console.log(

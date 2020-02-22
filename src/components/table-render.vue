@@ -30,9 +30,8 @@ export default {
 
             // Loop through all the inputOtpions from the store get the attribute check from the option parsed
             options.forEach(option => { 
-                if(option.name == nameOption){
-                    isCheck = option.isCheck
-                }
+                option.name == nameOption ? 
+                isCheck = option.isCheck : isCheck;
             });
 
             // Check if is the first line of the table and the option has been checked.

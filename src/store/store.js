@@ -47,13 +47,6 @@ export const store = new Vuex.Store({
                 let maxItemsRow = 0;
 
                 // Check if validation is active
-                // let isValidationActive = (options, target) => {
-                //     let _isVal;
-                //     options.map(opt => opt.name === target && opt.isCheck 
-                //         ? _isVal = true : _isVal = false);
-                //     return _isVal;
-                // }
-
                 let isValidationActive = (_options, target) =>{
                     let isVal;
                     _options.forEach(option =>{
@@ -62,8 +55,6 @@ export const store = new Vuex.Store({
 
                     return isVal; 
                 }
-
-                console.log("--------------------->", isValidationActive(allOptions, 'check data'))
 
                 // Lets split the data by rows
                 let rows = payload.split("\n");
@@ -99,11 +90,11 @@ export const store = new Vuex.Store({
         },
         updateOptions(state, payload) {
             const allOptions = state.inputOptions;
-            for (let i = 0; i < allOptions.length; i++) {
-                if (allOptions[i].name == payload.name) {
-                    allOptions[i].isCheck = payload.value
-                }
-            }
+
+            allOptions.forEach(option =>{
+                option.name === payload.name ? 
+                option.isCheck = payload.value : option.isCheck
+            })
         }
     },
     getters: {
@@ -119,5 +110,17 @@ export const store = new Vuex.Store({
         getMessage(state) {
             return state.messages
         }
+    }, 
+     actions :{
+        addFile(context, payload){
+            context.commit('loadDataFile', payload);
+        },
+        addLaunchBtn(context, payload){
+            context.commit('showLaunch', payload);
+        },
+        updateValues(context, payload){
+            context.commit('updateOptions', payload);
+        }
+
     }
 })
