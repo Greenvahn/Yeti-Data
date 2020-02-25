@@ -24,12 +24,33 @@ export const store = new Vuex.Store({
         messages: [
             {
                 id: 'msg0',
-                msg: 'The CSV has empty cells. It could be missing data.',
-                isActive: false
+                msg: [
+                'Title msg0',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
+                ],
+                isActive: false,
+                buttons:[
+                    {txt: 'Continue'}
+                ]
+            },
+            {
+                id: 'msg1',
+                msg: [
+                'Title msg1',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
+                ],
+                isActive: false,
+                buttons:[
+                    {txt: 'Close'}
+                ]
             }
         ],
         showLaunch: false,
         dataFile: null,
+        modalStatus:{
+            value: false,
+            id: ''
+        }
     },
     mutations: {
         loadDataFile(state, payload) {
@@ -82,7 +103,8 @@ export const store = new Vuex.Store({
                     console.log("before"+index, _cell);
 
                     // Includes commas inside of double quotes
-                    _cell = _cell.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
+                      _cell = _cell.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
+                      
                     /* will match:
                         (
                             ".*?"       double quotes + anything but double quotes + double quotes
@@ -99,8 +121,6 @@ export const store = new Vuex.Store({
 
                     // Do not push if cell is null
                     if(_cell != null){
-
-                        console.log("item"+index, _cell);
 
                         // push the data cell
                         dataArray.push(_cell);
@@ -141,8 +161,11 @@ export const store = new Vuex.Store({
         getInputOptions(state) {
             return state.inputOptions
         },
-        getMessage(state) {
+        getMessages(state) {
             return state.messages
+        },
+        getModalStatus(state) {
+            return state.modalStatus
         }
     },
      actions :{

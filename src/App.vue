@@ -9,18 +9,21 @@
     <input-loader></input-loader>
   </div>
     <table-render></table-render>
+    <modal-message></modal-message>
   </div>
 </template>
 
 <script>
 import inputLoader from './components/input-loader.vue'
 import tableRender from './components/table-render.vue'
+import modalMessage from './components/modal-msg.vue'
 
 export default {
   name: 'app',
   components: {
     inputLoader,
-    tableRender
+    tableRender,
+    modalMessage
   },
     methods:{
     },
@@ -77,6 +80,10 @@ export default {
   p{
     margin-bottom: 10px;
     &.desc{margin-bottom: 50px;}
+  }
+
+  .modal.isActive{
+    display: flex;
   }
 
 </style>
