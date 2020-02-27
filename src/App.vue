@@ -81,9 +81,4 @@ export default {
     margin-bottom: 10px;
     &.desc{margin-bottom: 50px;}
   }
-
-  .modal.isActive{
-    display: flex;
-  }
-
 </style>

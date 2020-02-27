@@ -24,17 +24,18 @@ export const store = new Vuex.Store({
         messages: [
             {
                 id: 'msg0',
+                type: 'message is-warning',
+                title: 'Checkout your data!',
                 msg: [
-                'Title msg0',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
+                'There are empty cells. The total number of cells per row are 10. You may want to review the format from the csv file.'
                 ],
-                isActive: false,
                 buttons:[
                     {txt: 'Continue'}
                 ]
             },
             {
                 id: 'msg1',
+                title: 'This is message 1',
                 msg: [
                 'Title msg1',
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
@@ -48,8 +49,7 @@ export const store = new Vuex.Store({
         showLaunch: false,
         dataFile: null,
         modalStatus:{
-            value: false,
-            id: ''
+            value: false
         }
     },
     mutations: {
@@ -77,7 +77,13 @@ export const store = new Vuex.Store({
                     if(isVal){
                         _data.forEach(row => {
                             row.length >= maxItemsRow ?
-                            maxItemsRow = row.length : console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow)
+                            maxItemsRow = row.length : 
+                            console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow);
+                            
+                            //Activate message 0 -> empty cells
+                            state.modalStatus.id = 'msg0',
+                            state.modalStatus.value = true
+                            state.modalStatus.params = maxItemsRow
                         })
                     } else{
                         console.log("%c Validation has NOT been activated ", "color:black; background: orange")
