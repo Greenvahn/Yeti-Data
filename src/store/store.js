@@ -29,28 +29,28 @@ export const store = new Vuex.Store({
                 type: 'message is-warning',
                 title: 'Check your data!',
                 msg: [
-                'There are empty cells. You may want to review the format from the csv file.'
+                    'There are empty cells. You may want to review the format from the csv file.'
                 ],
-                buttons:[
-                    {txt: 'Continue'}
+                buttons: [
+                    { txt: 'Continue' }
                 ]
             },
             {
                 id: 'msg1',
                 title: 'This is message 1',
                 msg: [
-                'Title msg1',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
+                    'Title msg1',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
                 ],
                 isActive: false,
-                buttons:[
-                    {txt: 'Close'}
+                buttons: [
+                    { txt: 'Close' }
                 ]
             }
         ],
         showLaunch: false,
         dataFile: null,
-        modalStatus:{
+        modalStatus: {
             value: false
         }
     },
@@ -70,24 +70,52 @@ export const store = new Vuex.Store({
                 let maxItemsRow = 0;
 
                 // Check if validation is active
-                const validateCells = (_data, _options, target) =>{
+                const validateCells = (_data, _options, target) => {
                     let isVal;
-                    _options.forEach(option =>{
-                       isVal = option.name === target && option.isCheck ? true : false;
+                    _options.forEach(option => {
+                        isVal = option.name === target && option.isCheck ? true : false;
                     })
 
-                    if(isVal){
-                        _data.forEach(row => {
-                            row.length >= maxItemsRow ?
-                            maxItemsRow = row.length : 
-                            console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow);
-                            
-                            //Activate message 0 -> empty cells
-                            state.modalStatus.id = 'msg0',
+                    /* 
+                     VALIDATION ACTIVE
+                     ============================
+                     * If validation check box is active run the following checkings:
+                     ** Check extension file ( csv)
+                     ** Check if empty rowsm in data
+                    */
+
+                    if (isVal) {
+
+                        //Check if extension file is correct
+                        if (extension) {
+
+                            // Check if empty rows
+                            _data.forEach(row => {
+                                row.length >= maxItemsRow ?
+                                    maxItemsRow = row.length :
+                                    console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow);
+
+                                //Activate message 0 -> empty cells
+                                state.modalStatus.id = 'msg0',
+                                state.modalStatus.value = true
+                                state.modalStatus.params = maxItemsRow
+                            })
+
+
+                        } else {
+
+                            //Activate message 1 -> format file
+                            state.modalStatus.id = 'msg1',
                             state.modalStatus.value = true
                             state.modalStatus.params = maxItemsRow
-                        })
-                    } else{
+
+                        }
+
+
+
+                    } else {
+
+                        // Validation has not been activated
                         console.log("%c Validation has NOT been activated ", "color:black; background: orange")
                     }
                 }
@@ -106,13 +134,13 @@ export const store = new Vuex.Store({
 
 
                     // make it a string for Regex
-                    let _cell= cell.toString();
+                    let _cell = cell.toString();
 
-                    console.log("before"+index, _cell);
+                    console.log("before" + index, _cell);
 
                     // Includes commas inside of double quotes
-                      _cell = _cell.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
-                      
+                    _cell = _cell.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
+
                     /* will match:
                         (
                             ".*?"       double quotes + anything but double quotes + double quotes
@@ -128,7 +156,7 @@ export const store = new Vuex.Store({
                     */
 
                     // Do not push if cell is null
-                    if(_cell != null){
+                    if (_cell != null) {
 
                         // push the data cell
                         dataArray.push(_cell);
@@ -153,12 +181,12 @@ export const store = new Vuex.Store({
         updateOptions(state, payload) {
             const allOptions = state.inputOptions;
 
-            allOptions.forEach(option =>{
+            allOptions.forEach(option => {
                 option.name === payload.name ?
-                option.isCheck = payload.value : option.isCheck
+                    option.isCheck = payload.value : option.isCheck
             })
         },
-        resetModal(state, payload){
+        resetModal(state, payload) {
             state.modalStatus.value = payload;
         }
     },
@@ -179,17 +207,17 @@ export const store = new Vuex.Store({
             return state.modalStatus
         }
     },
-     actions :{
-        addFile(context, payload){
+    actions: {
+        addFile(context, payload) {
             context.commit('loadDataFile', payload);
         },
-        addLaunchBtn(context, payload){
+        addLaunchBtn(context, payload) {
             context.commit('showLaunch', payload);
         },
-        updateValues(context, payload){
+        updateValues(context, payload) {
             context.commit('updateOptions', payload);
         },
-        closeModal(context, payload){
+        closeModal(context, payload) {
             context.commit('resetModal', payload)
         }
 
