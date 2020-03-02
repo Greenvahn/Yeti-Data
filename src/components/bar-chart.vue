@@ -1,0 +1,46 @@
+<template>
+<div class="container">
+  <figure>
+    <figcaption>A graph that shows numbers</figcaption>
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      class="chart"
+      width="420"
+      height="150"
+      aria-labelledby="title"
+      role="img"
+    >
+      <title id="title">A bart chart showing information</title>
+      <g class="bar">
+        <rect width="40" height="19" />
+        <text x="45" y="9.5" dy=".35em">4 apples</text>
+      </g>
+      <g class="bar">
+        <rect width="80" height="19" y="20" />
+        <text x="85" y="28" dy=".35em">8 bananas</text>
+      </g>
+      <g class="bar">
+        <rect width="150" height="19" y="40" />
+        <text x="150" y="48" dy=".35em">15 kiwis</text>
+      </g>
+      <g class="bar">
+        <rect width="160" height="19" y="60" />
+        <text x="161" y="68" dy=".35em">16 oranges</text>
+      </g>
+      <g class="bar">
+        <rect width="230" height="19" y="80" />
+        <text x="235" y="88" dy=".35em">23 lemons</text>
+      </g>
+    </svg>
+  </figure>
+</div>
+</template>
+<script>
+export default {
+    name:'bar-chart'
+};
+</script>
+<style>
+</style>
