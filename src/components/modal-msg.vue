@@ -7,13 +7,13 @@
         <div class="message-header">
           <p class="p-title">{{message.title}}</p>
           <span class="file-icon is-big" v-if="message.type === 'message is-warning'">
-              <font-awesome-icon icon="exclamation-triangle" />
+            <font-awesome-icon icon="exclamation-triangle" />
           </span>
         </div>
         <div class="message-body">
           <p v-for="(text,index) in message.msg" v-bind:key="index">{{text}}</p>
           <div class="btn-wrap">
-            <button class="button is-normal modal-btn">OK</button>
+            <button class="button is-normal modal-btn" v-on:click="closeMsg()">OK</button>
           </div>
         </div>
       </article>
@@ -44,6 +44,9 @@ export default {
       // Return the current value of the modal status --> modal.value = true ? show modal : hide modal
       // * This value is mutated from the store
       return _currentStatus.value;
+    },
+    closeMsg() {
+      this.$store.dispatch("closeModal", false);
     }
   },
   computed: {}
@@ -73,7 +76,7 @@ export default {
 
     width: 100%;
     .modal-btn {
-      min-width: 100px;
+      min-width: 60px;
       margin: 10 50%;
     }
   }

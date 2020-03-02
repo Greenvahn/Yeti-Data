@@ -14,20 +14,22 @@ export const store = new Vuex.Store({
         inputOptions: [
             {
                 name: 'has header',
-                isCheck: false
+                isCheck: false,
+                value: false
             },
             {
                 name: 'check data',
-                isCheck: false
+                isCheck: true,
+                value: true
             }
         ],
         messages: [
             {
                 id: 'msg0',
                 type: 'message is-warning',
-                title: 'Checkout your data!',
+                title: 'Check your data!',
                 msg: [
-                'There are empty cells. The total number of cells per row are 10. You may want to review the format from the csv file.'
+                'There are empty cells. You may want to review the format from the csv file.'
                 ],
                 buttons:[
                     {txt: 'Continue'}
@@ -155,6 +157,9 @@ export const store = new Vuex.Store({
                 option.name === payload.name ?
                 option.isCheck = payload.value : option.isCheck
             })
+        },
+        resetModal(state, payload){
+            state.modalStatus.value = payload;
         }
     },
     getters: {
@@ -183,6 +188,9 @@ export const store = new Vuex.Store({
         },
         updateValues(context, payload){
             context.commit('updateOptions', payload);
+        },
+        closeModal(context, payload){
+            context.commit('resetModal', payload)
         }
 
     }
