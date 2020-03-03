@@ -27,11 +27,14 @@ export const store = new Vuex.Store({
             {
                 id: 'msg0',
                 type: 'message is-warning',
-                icon: 'exclamation-triangle',
-                title: 'Check your data!',
+                icon: {
+                    name: 'exclamation-circle',
+                    size: 'fa-2x'
+                },
+                title: 'There are empty cells.',
                 msg: [
                     {
-                        p: 'There are empty cells. You may want to review the format from the csv file.'
+                        p: 'You may want to review the data from your file. It seems there are "empty" values/cells.'
                     }
                 ],
                 buttons: [
@@ -41,7 +44,10 @@ export const store = new Vuex.Store({
             {
                 id: 'msg1',
                 type: 'message is-warning',
-                icon: 'exclamation-triangle',
+                icon: {
+                    name: 'file-excel',
+                    size: 'fa-2x'
+                },
                 title: 'Not supported file',
                 msg: [
                     {

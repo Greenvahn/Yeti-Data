@@ -81,7 +81,7 @@ export default {
       (reader.onload = event => {
         //If reader successful
         if (reader.result) {
-          
+
           // commit data to the store.js --> loadDataFile function
           this.$store.dispatch('addFile', {result: event.target.result, name: this.fileName});
 
@@ -129,11 +129,4 @@ input[type="file"] {
   max-width: 500px;
 }
 
-.file-name {
-  //font-weight: bold;
-}
-
-.file-icon {
-  width: 2em !important;
-}
 </style>

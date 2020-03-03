@@ -5,10 +5,10 @@
       <!-- Any other Bulma elements you want -->
       <article :class="message.type">
         <div class="message-header">
-          <p class="p-title">{{message.title}}</p>
-          <span class="file-icon is-big" v-if="message.icon">
-            <font-awesome-icon :icon="message.icon" />
+          <span :class="'file-icon '+message.icon.size" v-if="message.icon">
+            <font-awesome-icon :icon="message.icon.name" />
           </span>
+          <p class="p-title">{{message.title}}</p>
         </div>
         <div class="message-body">
           <p v-for="(text,index) in message.msg" v-bind:key="index" :class="text.class">{{text.p}}</p>
@@ -68,7 +68,7 @@ export default {
   }
 
   .p-title {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin: 0px;
     padding: 5px;
   }
@@ -89,6 +89,16 @@ export default {
       margin: 10 50%;
     }
   }
+
+  .message-header{
+    justify-content: flex-start;
+
+    .file-icon{
+      margin-right: 10px;
+    }
+
+  }
+
 }
 
 @keyframes scaleIn {
