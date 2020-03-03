@@ -32,24 +32,24 @@ export const store = new Vuex.Store({
                     'There are empty cells. You may want to review the format from the csv file.'
                 ],
                 buttons: [
-                    { txt: 'Continue' }
+                    { txt: 'OK' }
                 ]
             },
             {
                 id: 'msg1',
-                title: 'This is message 1',
+                type: 'message is-warning',
+                title: 'Not csv file.',
                 msg: [
-                    'Title msg1',
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
+                    'Please, upload only comma separated files (csv)'
                 ],
-                isActive: false,
                 buttons: [
-                    { txt: 'Close' }
+                    { txt: 'OK' }
                 ]
             }
         ],
         showLaunch: false,
         dataFile: null,
+        validExtension: ['csv'],
         modalStatus: {
             value: false
         }
@@ -57,71 +57,77 @@ export const store = new Vuex.Store({
     mutations: {
         loadDataFile(state, payload) {
 
+
+                    /* 
+                     FORMAT TABLE VALIDATION
+                     ============================
+                    * If validation check box is active run the following checkings:
+                    * Validate cells --> check if there are empty cells
+                    */
+
+                        // Check if validation is active
+                        const validateFormat = (_data, _options, target) => {
+                            
+                            // isVal false by default
+                            let isVal = false
+                            
+                            // defined maximun items in row
+                            let maxItemsRow = 0;
+
+                            // Iterate throug the options and check if validation is active
+                            _options.forEach(option => {
+                                isVal = option.name === target && option.isCheck ? true : false;
+                            })
+
+                            // Active validation
+
+                            if (isVal) {
+                                
+                                // Check if empty rows
+                                _data.forEach(row => {
+                                    row.length >= maxItemsRow ?
+                                        maxItemsRow = row.length :
+                                        console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow);
+
+                                    //Activate message 0 -> empty cells
+                                    state.modalStatus.id = 'msg0',
+                                    state.modalStatus.value = true,
+                                    state.modalStatus.params = maxItemsRow
+                                })
+
+                            } else {
+                                // Validation has not been activated
+                                console.log("%c Validation has NOT been activated ", "color:black; background: orange")
+                            }
+
+                        }
+
+
+
+
             if (!payload) {
                 state.dataFile = payload;
             } else {
+
+
+                //Check if extension file is correct
+                let _fileExtension = payload.name.split('.').pop().toLowerCase();
+                let extensionSuccess = state.validExtension.indexOf(_fileExtension);
+                extensionSuccess != -1 ? extensionSuccess = true : extensionSuccess = false;
+
+                if (!extensionSuccess) {
+                    //Activate message 1 -> format file
+                    state.modalStatus.id = 'msg1',
+                    state.modalStatus.value = true
+                } else {
                 // Retrieves all options
                 const allOptions = state.inputOptions;
 
                 // Creates empty array
                 const dataArray = []
 
-                // Validation - defined maximun items in row
-                let maxItemsRow = 0;
-
-                // Check if validation is active
-                const validateCells = (_data, _options, target) => {
-                    let isVal;
-                    _options.forEach(option => {
-                        isVal = option.name === target && option.isCheck ? true : false;
-                    })
-
-                    /* 
-                     VALIDATION ACTIVE
-                     ============================
-                     * If validation check box is active run the following checkings:
-                     ** Check extension file ( csv)
-                     ** Check if empty rowsm in data
-                    */
-
-                    if (isVal) {
-
-                        //Check if extension file is correct
-                        if (extension) {
-
-                            // Check if empty rows
-                            _data.forEach(row => {
-                                row.length >= maxItemsRow ?
-                                    maxItemsRow = row.length :
-                                    console.warn('There are empty cells. Max number of cells per row are ' + maxItemsRow);
-
-                                //Activate message 0 -> empty cells
-                                state.modalStatus.id = 'msg0',
-                                state.modalStatus.value = true
-                                state.modalStatus.params = maxItemsRow
-                            })
-
-
-                        } else {
-
-                            //Activate message 1 -> format file
-                            state.modalStatus.id = 'msg1',
-                            state.modalStatus.value = true
-                            state.modalStatus.params = maxItemsRow
-
-                        }
-
-
-
-                    } else {
-
-                        // Validation has not been activated
-                        console.log("%c Validation has NOT been activated ", "color:black; background: orange")
-                    }
-                }
-
                 // Lets split the data by rows
-                let rows = payload.split("\n");
+                let rows = payload.result.split("\n");
 
                 // Filter empty rows or null values
                 rows = rows.filter(item => {
@@ -157,7 +163,6 @@ export const store = new Vuex.Store({
 
                     // Do not push if cell is null
                     if (_cell != null) {
-
                         // push the data cell
                         dataArray.push(_cell);
                     }
@@ -165,12 +170,16 @@ export const store = new Vuex.Store({
 
                 })
 
-                validateCells(dataArray, allOptions, 'check data');
+                // Validates format table
+                validateFormat(dataArray, allOptions, 'check data');
 
 
                 // mutates dataFile state with dataArray values
                 console.table(dataArray);
                 state.dataFile = dataArray;
+
+
+                }
 
             }
 

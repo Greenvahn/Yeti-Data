@@ -69,6 +69,7 @@ export default {
       if (this.selectedFile) {
         // 1 – change button LAUNCH state --> (show)
         this.$store.dispatch("addLaunchBtn", this.showLaunch = true);
+
       }
     },
     launchData() {
@@ -81,7 +82,7 @@ export default {
         //If reader successful
         if (reader.result) {
           // commit data to the store.js --> loadDataFile function
-          this.$store.dispatch('addFile', event.target.result);
+          this.$store.dispatch('addFile', {result: event.target.result, name: this.fileName});
 
           // change button LAUNCH state to FALSE after launch --> (hide)
           this.$store.dispatch('addLaunchBtn', this.showLaunch = false);
