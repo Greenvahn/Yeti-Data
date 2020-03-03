@@ -27,9 +27,12 @@ export const store = new Vuex.Store({
             {
                 id: 'msg0',
                 type: 'message is-warning',
+                icon: 'exclamation-triangle',
                 title: 'Check your data!',
                 msg: [
-                    'There are empty cells. You may want to review the format from the csv file.'
+                    {
+                        p: 'There are empty cells. You may want to review the format from the csv file.'
+                    }
                 ],
                 buttons: [
                     { txt: 'OK' }
@@ -38,9 +41,19 @@ export const store = new Vuex.Store({
             {
                 id: 'msg1',
                 type: 'message is-warning',
-                title: 'Not csv file.',
+                icon: 'exclamation-triangle',
+                title: 'Not supported file',
                 msg: [
-                    'Please, upload only comma separated files (csv)'
+                    {
+                        p: 'Please, upload only comma separated files (csv).'
+                    },
+                    {
+                        p: 'What is a csv file?',
+                        class:'p-subtitle'
+                    },
+                    {
+                        p: 'A comma-separated values file is a delimited text file that uses a comma to separate values. Each line of the file is a data record. Each record consists of one or more fields, separated by commas.'
+                    }
                 ],
                 buttons: [
                     { txt: 'OK' }
@@ -88,8 +101,8 @@ export const store = new Vuex.Store({
 
                         //Activate message 0 -> empty cells
                         state.modalStatus.id = 'msg0',
-                        state.modalStatus.value = true,
-                        state.modalStatus.params = maxItemsRow
+                            state.modalStatus.value = true,
+                            state.modalStatus.params = maxItemsRow
                     })
 
                 } else {
@@ -125,8 +138,8 @@ export const store = new Vuex.Store({
                 // File extesion not accepted
                 if (!extensionSuccess) {
                     state.modalStatus.id = 'msg1', //Activate message 1 -> format file
-                    state.modalStatus.value = true
-                } 
+                        state.modalStatus.value = true
+                }
                 // Extension accepted
                 else {
 

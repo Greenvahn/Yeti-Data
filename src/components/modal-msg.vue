@@ -6,14 +6,19 @@
       <article :class="message.type">
         <div class="message-header">
           <p class="p-title">{{message.title}}</p>
-          <span class="file-icon is-big" v-if="message.type === 'message is-warning'">
-            <font-awesome-icon icon="exclamation-triangle" />
+          <span class="file-icon is-big" v-if="message.icon">
+            <font-awesome-icon :icon="message.icon" />
           </span>
         </div>
         <div class="message-body">
-          <p v-for="(text,index) in message.msg" v-bind:key="index">{{text}}</p>
+          <p v-for="(text,index) in message.msg" v-bind:key="index" :class="text.class">{{text.p}}</p>
           <div class="btn-wrap">
-            <button class="button is-normal modal-btn" v-on:click="closeMsg()">OK</button>
+            <button
+              v-for="(button,index) in message.buttons"
+              v-bind:key="index"
+              class="button is-normal modal-btn"
+              v-on:click="closeMsg()"
+            >{{button.txt}}</button>
           </div>
         </div>
       </article>
@@ -66,7 +71,11 @@ export default {
     font-size: 1.2em;
     margin: 0px;
     padding: 5px;
-    text-transform: uppercase;
+  }
+  .p-subtitle {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 25px 0px 10px 0px;
   }
 
   .btn-wrap {
