@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
                     name: 'exclamation-circle',
                     size: 'fa-2x'
                 },
-                title: 'There are empty cells.',
+                title: 'Review your data.',
                 msg: [
                     {
                         p: 'You may want to review the data from your file. It seems there are "empty" values/cells.'
@@ -127,6 +127,7 @@ export const store = new Vuex.Store({
             * Builds an array with the cells matched by regex:
                 * > Uses commas to divide cells
                 * > Kepps double quotes inside cell
+            * Adds lazy loading if the csv file is too big
             */
 
             // Payload => false
@@ -136,18 +137,40 @@ export const store = new Vuex.Store({
             // Payload => true
             else {
 
-                // Retrieves file extension and checks if is correct
+                /* ==== FILE EXTENSION
+                * > Retrieves file extension and checks if is correct 
+                * > Extension = EXT
+                * > Two values => OK / NOT accepted
+                */
+
                 let _fileExtension = payload.name.split('.').pop().toLowerCase(); // retrieves extension file
                 let extensionSuccess = state.validExtension.indexOf(_fileExtension); // compares agaisnt accepted extensions
                 extensionSuccess != -1 ? extensionSuccess = true : extensionSuccess = false; // returns true if accepted
 
-                // File extesion not accepted
+                /**** EXT ==> NOT Accepted */
                 if (!extensionSuccess) {
                     state.modalStatus.id = 'msg1', //Activate message 1 -> format file
-                        state.modalStatus.value = true
+                    state.modalStatus.value = true
                 }
-                // Extension accepted
+                /**** EXT ==> OK Accepted */
                 else {
+
+
+                /* ==== LAZY LOADING 
+                * > Gets file size
+                * > IF biggers than passMark ==> Lazy loading ACTIVE
+                */
+
+                // File Size
+                 let _fileSize = payload.size
+                 let _passMark = 10000  // Customized value
+
+                 // If FilzeSize is bigger than 10000 - activate lazy loader
+                  _fileSize > _passMark ? 
+                  alert(_fileSize, "Activate lazy loader") : false;
+
+
+                    /* ================ DATA PROCESS - START! ==== */
 
                     // Creates dataArray to deploy the final data
                     const dataArray = []
@@ -163,6 +186,8 @@ export const store = new Vuex.Store({
 
                     // iterate through the rows
                     rows.forEach((cell, index) => {
+
+                        console.log(rows.length, index)
 
 
                         // make it a string for Regex
@@ -192,7 +217,15 @@ export const store = new Vuex.Store({
                         }
 
 
+                        /* ================ DATA PROCESS - END ==== */
+
+                        // Check if the loop has ended
+                        index === (rows.length) -1 ?
+                        setTimeout( () => alert("end loop"), _fileSize/1000 )
+                        : false;                        
+
                     })
+
 
 
                     // Validates format table
