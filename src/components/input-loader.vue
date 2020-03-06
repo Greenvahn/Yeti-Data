@@ -34,8 +34,8 @@
 
 <script>
 // Import options from external component
-import optionsLoader from "./input-options.vue";
-import notificationLoader from "./notification-msg.vue";
+import optionsLoader from "./input-options.vue"
+import notificationLoader from "./notification-msg.vue"
 
 export default {
   name: "inputLoader",

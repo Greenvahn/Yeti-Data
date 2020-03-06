@@ -1,9 +1,11 @@
 <template>
   <transition name="fadeInLeft">
-    <div class="columns" v-if="getNotification">
-      <div class="notification is-primary is-light">
-        <button class="delete"></button>
-        <p v-for="(text, index) in notification" :key="index">{{text}}</p>
+    <div v-if="notificationStatus" class="container note-wrap" :class="{isActive: getNotification()}">
+      <div class="columns">
+        <div :class="notification.type">
+          <button class="delete"></button>
+          <p v-for="(text, index) in notification.msg" :key="index">{{text.p}}</p>
+        </div>
       </div>
     </div>
   </transition>
@@ -13,7 +15,7 @@ export default {
   name: "notificationLoader",
   data() {
     return {
-      notification: null
+      notification: {}
     };
   },
   methods: {
@@ -32,21 +34,32 @@ export default {
       // Return the current value of the modal status --> modal.value = true ? show modal : hide modal
       // * This value is mutated from the store
       return _currentStatus.value;
-    },
+    }
   },
   components: {},
-  computed: {}
+  computed: {
+    notificationStatus() {
+      return this.$store.getters.getNotificationStatus.value;
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 
+.container.note-wrap{
+
+  p{margin-bottom: 0px;}
+
+}
+
+
 /* Table animation */
-.fadeIn-enter-active{
+.fadeInLeft-enter-active{
 animation: fadeInLeft .6s; 
 }
 
-.fadeIn-leave-active{
+.fadeInLeft-leave-active{
 animation: fadeInLeft .4s reverse;
 }
 
@@ -61,6 +74,4 @@ animation: fadeInLeft .4s reverse;
      margin-left: 0px;
   }
 }
-
-
 </style>

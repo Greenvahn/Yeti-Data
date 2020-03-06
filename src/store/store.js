@@ -55,7 +55,7 @@ export const store = new Vuex.Store({
                     },
                     {
                         p: 'What is a csv file?',
-                        class:'p-subtitle'
+                        class: 'p-subtitle'
                     },
                     {
                         p: 'A comma-separated values file is a delimited text file that uses a comma to separate values. Each line of the file is a data record. Each record consists of one or more fields, separated by commas.'
@@ -67,7 +67,7 @@ export const store = new Vuex.Store({
             },
             {
                 id: 'msg2',
-                type: 'message is-warning',
+                type: 'notification is-primary is-light',
                 icon: {
                     name: 'exclamation-circle',
                     size: 'fa-2x'
@@ -75,7 +75,7 @@ export const store = new Vuex.Store({
                 title: 'Review your data.',
                 msg: [
                     {
-                        p: 'You may want to review the data from your file. It seems there are "empty" values/cells.'
+                        p: 'Content loaded succesfully!'
                     }
                 ],
                 buttons: [
@@ -170,24 +170,24 @@ export const store = new Vuex.Store({
                 /**** EXT ==> NOT Accepted */
                 if (!extensionSuccess) {
                     state.modalStatus.id = 'msg1', //Activate message 1 -> format file
-                    state.modalStatus.value = true
+                        state.modalStatus.value = true
                 }
                 /**** EXT ==> OK Accepted */
                 else {
 
 
-                /* ==== LAZY LOADING 
-                * > Gets file size
-                * > IF biggers than passMark ==> Lazy loading ACTIVE
-                */
+                    /* ==== LAZY LOADING 
+                    * > Gets file size
+                    * > IF biggers than passMark ==> Lazy loading ACTIVE
+                    */
 
-                // File Size
-                 let _fileSize = payload.size
-                 let _passMark = 10000  // Customized value
+                    // File Size
+                    let _fileSize = payload.size
+                    let _passMark = 10000  // Customized value
 
-                 // If FilzeSize is bigger than 10000 - activate lazy loader
-                //   _fileSize > _passMark ? 
-                //   alert(_fileSize, "Activate lazy loader") : false;
+                    // If FilzeSize is bigger than 10000 - activate lazy loader
+                    //   _fileSize > _passMark ? 
+                    //   alert(_fileSize, "Activate lazy loader") : false;
 
 
                     /* ================ DATA PROCESS - START! ==== */
@@ -206,9 +206,6 @@ export const store = new Vuex.Store({
 
                     // iterate through the rows
                     rows.forEach((cell, index) => {
-
-                        console.log(rows.length, index)
-
 
                         // make it a string for Regex
                         let _cell = cell.toString();
@@ -240,11 +237,10 @@ export const store = new Vuex.Store({
                         /* ================ DATA PROCESS - END ==== */
 
                         // Check if the loop has ended
-                        index === (rows.length) -1 && _fileSize > _passMark ?
-                        setTimeout( () => 
-                             state.notificationStatus.id = 'msg2', state.notificationStatus.value = true, 
-                        _fileSize/1000 )
-                        : false;                        
+                        index === (rows.length) - 1 && _fileSize >= _passMark ?
+                            setTimeout(() =>
+                                (state.notificationStatus.id = 'msg2', state.notificationStatus.value = true), _fileSize / 1000)
+                            : false;
 
                     })
 
