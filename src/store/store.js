@@ -64,12 +64,32 @@ export const store = new Vuex.Store({
                 buttons: [
                     { txt: 'OK' }
                 ]
+            },
+            {
+                id: 'msg2',
+                type: 'message is-warning',
+                icon: {
+                    name: 'exclamation-circle',
+                    size: 'fa-2x'
+                },
+                title: 'Review your data.',
+                msg: [
+                    {
+                        p: 'You may want to review the data from your file. It seems there are "empty" values/cells.'
+                    }
+                ],
+                buttons: [
+                    { txt: 'OK' }
+                ]
             }
         ],
         showLaunch: false,
         dataFile: null,
         validExtension: ['csv'],
         modalStatus: {
+            value: false
+        },
+        notificationStatus: {
             value: false
         }
     },
@@ -166,8 +186,8 @@ export const store = new Vuex.Store({
                  let _passMark = 10000  // Customized value
 
                  // If FilzeSize is bigger than 10000 - activate lazy loader
-                  _fileSize > _passMark ? 
-                  alert(_fileSize, "Activate lazy loader") : false;
+                //   _fileSize > _passMark ? 
+                //   alert(_fileSize, "Activate lazy loader") : false;
 
 
                     /* ================ DATA PROCESS - START! ==== */
@@ -220,8 +240,10 @@ export const store = new Vuex.Store({
                         /* ================ DATA PROCESS - END ==== */
 
                         // Check if the loop has ended
-                        index === (rows.length) -1 ?
-                        setTimeout( () => alert("end loop"), _fileSize/1000 )
+                        index === (rows.length) -1 && _fileSize > _passMark ?
+                        setTimeout( () => 
+                             state.notificationStatus.id = 'msg2', state.notificationStatus.value = true, 
+                        _fileSize/1000 )
                         : false;                        
 
                     })
@@ -277,6 +299,9 @@ export const store = new Vuex.Store({
         },
         getModalStatus(state) {
             return state.modalStatus
+        },
+        getNotificationStatus(state) {
+            return state.notificationStatus
         }
     },
     actions: {

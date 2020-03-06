@@ -27,17 +27,21 @@
       </div>
     </div>
 
+    <notification-loader></notification-loader>
+
 </div>
 </template>
 
 <script>
 // Import options from external component
 import optionsLoader from "./input-options.vue";
+import notificationLoader from "./notification-msg.vue";
 
 export default {
   name: "inputLoader",
   components: {
-    optionsLoader
+    optionsLoader,
+    notificationLoader
   },
   data() {
     return {
