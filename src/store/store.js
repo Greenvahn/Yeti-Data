@@ -67,7 +67,31 @@ export const store = new Vuex.Store({
             },
             {
                 id: 'msg2',
-                type: 'notification is-primary is-light',
+                type: 'message is-info',
+                icon: {
+                    name: 'file-excel',
+                    size: 'fa-2x'
+                },
+                title: 'Loads of data!',
+                msg: [
+                    {
+                        p: 'The app does not support files bigger than 100Kb.'
+                    },
+                    {
+                        p: 'Let\'s keep it simple!',
+                        class: 'p-subtitle'
+                    },
+                    {
+                        p: 'This web application has been designed to support basic data charts created with small amount of data. Please, simplify your csv file or just select a different data file.'
+                    }
+                ],
+                buttons: [
+                    { txt: 'OK' }
+                ]
+            },
+            {
+                id: 'msg3',
+                type: 'notification is-primary is-light is-promise',
                 icon: {
                     name: 'exclamation-circle',
                     size: 'fa-2x'
@@ -157,6 +181,11 @@ export const store = new Vuex.Store({
             // Payload => true
             else {
 
+                // File Size
+                let _fileSize = payload.size
+                let _passMark = 100000  // Customized value
+
+
                 /* ==== FILE EXTENSION
                 * > Retrieves file extension and checks if is correct 
                 * > Extension = EXT
@@ -167,10 +196,21 @@ export const store = new Vuex.Store({
                 let extensionSuccess = state.validExtension.indexOf(_fileExtension); // compares agaisnt accepted extensions
                 extensionSuccess != -1 ? extensionSuccess = true : extensionSuccess = false; // returns true if accepted
 
+
+
+
                 /**** EXT ==> NOT Accepted */
                 if (!extensionSuccess) {
                     state.modalStatus.id = 'msg1', //Activate message 1 -> format file
-                        state.modalStatus.value = true
+                    state.modalStatus.value = true
+                } 
+                /**** FILE SIZE ==> NOT Accepted */
+                else if (_fileSize >= _passMark ){
+                    state.modalStatus.id = 'msg2', //Activate message 2 -> file size
+                    state.modalStatus.value = true
+
+                    return false; // Stop process here!
+
                 }
                 /**** EXT ==> OK Accepted */
                 else {
@@ -180,10 +220,6 @@ export const store = new Vuex.Store({
                     * > Gets file size
                     * > IF biggers than passMark ==> Lazy loading ACTIVE
                     */
-
-                    // File Size
-                    let _fileSize = payload.size
-                    let _passMark = 10000  // Customized value
 
                     // If FilzeSize is bigger than 10000 - activate lazy loader
                     //   _fileSize > _passMark ? 
@@ -236,11 +272,31 @@ export const store = new Vuex.Store({
 
                         /* ================ DATA PROCESS - END ==== */
 
+                        /* Define a new promise - loading notification astate asynchronous*/
+                        const showNotification = (msgID, stateValue, ms) => new Promise(resolve => {
+                            setTimeout(() => {
+                                state.notificationStatus.id = msgID, state.notificationStatus.value = stateValue
+                            }, ms);
+                            resolve();
+                        });
+
+
                         // Check if the loop has ended
-                        index === (rows.length) - 1 && _fileSize >= _passMark ?
-                            setTimeout(() =>
-                                (state.notificationStatus.id = 'msg2', state.notificationStatus.value = true), _fileSize / 1000)
-                            : false;
+                        if(index === (rows.length) - 1){
+
+                            /* 
+                            ===== > Shows notification - PROMISE
+                            ** Call a specific notification in asynchronous way
+                            * > Call showNotification function and parse --> message ID || notification status value || timing
+                            * > Then call itself but parse 'false' as stateValue to hide the message
+                            * > For showing -> factor fo 1000 ms
+                            * > For hiding -> use a factor of 0.3 ms
+                            */
+                            showNotification('msg3', true, _fileSize/2000).then(() => {
+                                showNotification('msg3', false, _fileSize/0.3)
+                            })
+
+                        }
 
                     })
 

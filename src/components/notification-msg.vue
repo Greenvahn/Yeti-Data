@@ -1,6 +1,10 @@
 <template>
   <transition name="fadeInLeft">
-    <div v-if="notificationStatus" class="container note-wrap" :class="{isActive: getNotification()}">
+    <div
+      v-if="notificationStatus"
+      class="container note-wrap"
+      :class="{isActive: getNotification()}"
+    >
       <div class="columns">
         <div :class="notification.type">
           <button class="delete"></button>
@@ -46,32 +50,48 @@ export default {
 </script>
 
 <style lang="scss">
+.container {
+  &.note-wrap {
+    p {
+      margin-bottom: 0px;
+    }
+  }
 
-.container.note-wrap{
-
-  p{margin-bottom: 0px;}
-
+  .notification {
+    &.is-light {
+      background-color: #ebfffc;
+      color: #00947e;
+    }
+    &.is-promise{
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 0 auto;
+      .delete{
+        display: none;
+      }
+    }
+  }
 }
-
 
 /* Table animation */
-.fadeInLeft-enter-active{
-animation: fadeInLeft .6s; 
+.fadeInLeft-enter-active {
+  animation: fadeInLeft 0.6s;
 }
 
-.fadeInLeft-leave-active{
-animation: fadeInLeft .4s reverse;
+.fadeInLeft-leave-active {
+  animation: fadeInLeft 0.8s reverse;
 }
 
-
-@keyframes fadeInLeft{
-  0%{
+@keyframes fadeInLeft {
+  0% {
     opacity: 0;
     margin-left: -100px;
   }
-  100%{
+  100% {
     opacity: 1;
-     margin-left: 0px;
+    margin-left: 0px;
   }
 }
 </style>
