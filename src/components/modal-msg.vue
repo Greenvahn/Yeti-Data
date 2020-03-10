@@ -5,15 +5,20 @@
       <!-- Any other Bulma elements you want -->
       <article :class="message.type">
         <div class="message-header">
-          <p class="p-title">{{message.title}}</p>
-          <span class="file-icon is-big" v-if="message.type === 'message is-warning'">
-            <font-awesome-icon icon="exclamation-triangle" />
+          <span :class="'file-icon '+message.icon.size" v-if="message.icon">
+            <font-awesome-icon :icon="message.icon.name" />
           </span>
+          <p class="p-title">{{message.title}}</p>
         </div>
         <div class="message-body">
-          <p v-for="(text,index) in message.msg" v-bind:key="index">{{text}}</p>
+          <p v-for="(text,index) in message.msg" v-bind:key="index" :class="text.class">{{text.p}}</p>
           <div class="btn-wrap">
-            <button class="button is-normal modal-btn" v-on:click="closeMsg()">OK</button>
+            <button
+              v-for="(button,index) in message.buttons"
+              v-bind:key="index"
+              class="button is-normal modal-btn"
+              v-on:click="closeMsg()"
+            >{{button.txt}}</button>
           </div>
         </div>
       </article>
@@ -63,10 +68,14 @@ export default {
   }
 
   .p-title {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin: 0px;
     padding: 5px;
-    text-transform: uppercase;
+  }
+  .p-subtitle {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 25px 0px 10px 0px;
   }
 
   .btn-wrap {
@@ -80,6 +89,16 @@ export default {
       margin: 10 50%;
     }
   }
+
+  .message-header{
+    justify-content: flex-start;
+
+    .file-icon{
+      margin-right: 10px;
+    }
+
+  }
+
 }
 
 @keyframes scaleIn {

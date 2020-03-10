@@ -27,23 +27,28 @@
       </div>
     </div>
 
+    <notification-loader></notification-loader>
+
 </div>
 </template>
 
 <script>
 // Import options from external component
-import optionsLoader from "./input-options.vue";
+import optionsLoader from "./input-options.vue"
+import notificationLoader from "./notification-msg.vue"
 
 export default {
   name: "inputLoader",
   components: {
-    optionsLoader
+    optionsLoader,
+    notificationLoader
   },
   data() {
     return {
       selectedFile: "",
       fileName: "No file chosen...",
       dataFile: null,
+      fileSize: null,
       showLaunch: false
     };
   },
@@ -55,6 +60,9 @@ export default {
 
       // Updates the file name on input onChange
       this.fileName = event.target.files[0].name;
+
+      // Updates file size
+      this.fileSize = event.target.files[0].size;
 
       // Retrieves file from input onChange
       this.selectedFile = event.target.files[0];
@@ -69,6 +77,7 @@ export default {
       if (this.selectedFile) {
         // 1 – change button LAUNCH state --> (show)
         this.$store.dispatch("addLaunchBtn", this.showLaunch = true);
+
       }
     },
     launchData() {
@@ -80,8 +89,9 @@ export default {
       (reader.onload = event => {
         //If reader successful
         if (reader.result) {
+
           // commit data to the store.js --> loadDataFile function
-          this.$store.dispatch('addFile', event.target.result);
+          this.$store.dispatch('addFile', {result: event.target.result, name: this.fileName, size: this.fileSize});
 
           // change button LAUNCH state to FALSE after launch --> (hide)
           this.$store.dispatch('addLaunchBtn', this.showLaunch = false);
@@ -127,11 +137,4 @@ input[type="file"] {
   max-width: 500px;
 }
 
-.file-name {
-  //font-weight: bold;
-}
-
-.file-icon {
-  width: 2em !important;
-}
 </style>
