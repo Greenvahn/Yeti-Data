@@ -108,7 +108,10 @@ export const store = new Vuex.Store({
             }
         ],
         showLaunch: false,
-        showBarchart: false,
+        showBarchart: {
+            btn: false,
+            graphic: false
+        },
         dataFile: null,
         validExtension: ['csv'],
         modalStatus: {
@@ -326,7 +329,7 @@ export const store = new Vuex.Store({
             state.showLaunch = payload
         },
         showChartBar(state, payload) {
-            state.showBarchart = payload
+            state.showBarchart.graphic = payload
         },
         updateOptions(state, payload) {
             const allOptions = state.inputOptions;
@@ -347,6 +350,9 @@ export const store = new Vuex.Store({
         getButton(state) {
             return state.showLaunch
         },
+        getButtonChartBar(state) {
+            return state.showLaunch
+        },
         getInputOptions(state) {
             return state.inputOptions
         },
@@ -360,7 +366,7 @@ export const store = new Vuex.Store({
             return state.notificationStatus
         },
         getChartBar(state) {
-            return state.showBarchart
+            return state.showBarchart.graphic
         }
     },
     actions: {

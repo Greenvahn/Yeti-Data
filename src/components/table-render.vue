@@ -6,22 +6,19 @@
                     <td v-for="(element, index) in item" v-bind:key="index">{{element}}</td>
                 </tr>
             </table>
-            <barChart></barChart>
-            <buttonChart></buttonChart>
+            <chartBoxBar></chartBoxBar>
         </div>
   </transition>
 </template>
 
 <script>
 
-import barChart from './bar-chart.vue'
-import buttonChart from './button-chart.vue'
+import chartBoxBar from './chart-box--bar.vue'
 
 export default {
     name: 'table-render',
     components: {
-        barChart,
-        buttonChart
+        chartBoxBar
     },
     data(){
         return{

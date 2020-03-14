@@ -12,18 +12,19 @@ export default {
   methods: {
     
     loadPresets() {
-    const _dataTable = this.$store.getters.getTable;
 
-       /* Empty arrays */
-      let _arrLabels = [];
-      let _arrValues = [];
+    // const _dataTable = this.$store.getters.getTable;
 
-      // _arrValues = _dataTable.filter()
-      _dataTable.forEach(element => {
-        typeof element != "number"
-          ? _arrLabels.push(element)
-          : _arrValues.push(element);
-      });
+    //    /* Empty arrays */
+    //   let _arrLabels = [];
+    //   let _arrValues = [];
+
+    //   // _arrValues = _dataTable.filter()
+    //   _dataTable.forEach(element => {
+    //       //console.log(typeof parseInt(element), "----")
+    //       console.log(element[2])
+    //   });
+
 
     //Show chart
     this.show = !this.show
@@ -33,6 +34,9 @@ export default {
 
   },
   computed: {
+    //   showButton(){
+    //     return this.$store.getters.getChartBar;
+    //   }
   }
 };
 </script>
