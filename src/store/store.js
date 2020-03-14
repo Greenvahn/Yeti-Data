@@ -23,6 +23,34 @@ export const store = new Vuex.Store({
                 value: true
             }
         ],
+        buttons: {
+            typeOfChart: [
+                {
+                    text: 'Bars',
+                    state: true
+                },
+                {
+                    text: 'Pie',
+                    state: true
+                }
+            ],
+            loadChart : [
+                {
+                    id: 'chart-bar',
+                    class: 'addChartBar',
+                    function: 'loadPresets',
+                    text: 'Launch chart',
+                    state: true
+                },
+                {
+                    id: 'chart-pie',
+                    class: 'addChartPie',
+                    function: 'loadPresets',
+                    text: 'Launch chart Pie',
+                    state: false
+                }
+            ]
+        },
         messages: [
             {
                 id: 'msg0',
@@ -350,9 +378,6 @@ export const store = new Vuex.Store({
         getButton(state) {
             return state.showLaunch
         },
-        getButtonChartBar(state) {
-            return state.showLaunch
-        },
         getInputOptions(state) {
             return state.inputOptions
         },
@@ -367,6 +392,9 @@ export const store = new Vuex.Store({
         },
         getChartBar(state) {
             return state.showBarchart.graphic
+        },
+        getButtonLib(state){
+            return state.buttons
         }
     },
     actions: {
