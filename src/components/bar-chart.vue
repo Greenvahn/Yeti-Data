@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <figure>
+  <figure v-if="showChart">
     <figcaption>A graph that shows numbers</figcaption>
     <svg
       version="1.1"
@@ -12,7 +12,7 @@
       aria-labelledby="title"
       role="img"
     >
-      <title id="title">A bart chart showing information</title>
+      <title id="title">Chart bar</title>
       <g class="bar">
         <rect width="40" height="19" />
         <text x="45" y="9.5" dy=".35em">4 apples</text>
@@ -39,7 +39,18 @@
 </template>
 <script>
 export default {
-    name:'bar-chart'
+    name:'bar-chart',
+    components:{},
+    data (){
+      return{
+        temp: false
+      }
+    },
+    computed:{
+      showChart(){
+        return this.$store.getters.getChartBar;
+      }
+    }
 };
 </script>
 <style>

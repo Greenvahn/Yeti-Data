@@ -64,6 +64,7 @@ table{
     border: 1px solid #999;
     background: white;
     width: 100%;
+    margin-bottom: 50px;
     tr{
         border-bottom: 1px solid #cecece;
         &:nth-child(odd){

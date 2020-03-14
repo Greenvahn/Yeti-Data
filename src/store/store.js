@@ -108,6 +108,7 @@ export const store = new Vuex.Store({
             }
         ],
         showLaunch: false,
+        showBarchart: false,
         dataFile: null,
         validExtension: ['csv'],
         modalStatus: {
@@ -324,6 +325,9 @@ export const store = new Vuex.Store({
         showLaunch(state, payload) {
             state.showLaunch = payload
         },
+        showChartBar(state, payload) {
+            state.showBarchart = payload
+        },
         updateOptions(state, payload) {
             const allOptions = state.inputOptions;
 
@@ -354,6 +358,9 @@ export const store = new Vuex.Store({
         },
         getNotificationStatus(state) {
             return state.notificationStatus
+        },
+        getChartBar(state) {
+            return state.showBarchart
         }
     },
     actions: {
@@ -368,6 +375,9 @@ export const store = new Vuex.Store({
         },
         closeModal(context, payload) {
             context.commit('resetModal', payload)
+        },
+        addChartBar(context, payload) {
+            context.commit('showChartBar', payload);
         }
 
     }
