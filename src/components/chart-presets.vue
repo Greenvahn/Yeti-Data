@@ -1,28 +1,46 @@
 <template>
-  <div class="control">
-    <div class="type-chart">
+  <div class="control columns">
+    <div class="column is-2 type-chart">
       <button v-for="(button, index) in giveMeButtons" :key="index">{{button.text}}</button>
     </div>
-    <div class="chart-options">
-      <div v-for="(dropdown,index) in giveMeDropdowns" v-on:change="commitValue()" :key="index" :class="dropdown.class" v-bind:id="dropdown.id">
+    <div class="column" v-for="(dropdown,index) in giveMeDropdowns" :key="index">
+      <div class="chart-options">
+      <label>{{dropdown.id}}</label>
+      <div v-on:change="commitValue(dropdown)" :key="index" :class="dropdown.class" v-bind:id="dropdown.id">
         <select>
           <option>{{dropdown.text}}</option>
           <option v-for="(option, index) in dropdown.options" :key="index">Column {{option}}</option>
         </select>
       </div>
+      </div>
+    </div>
+    <div class="column is-2">
+      <buttonChart></buttonChart>
     </div>
   </div>
 </template>
 <script>
+import buttonChart from './button-chart.vue'
+
 export default {
   name: "chart-presets",
-  components: {},
+  components: {
+    buttonChart
+  },
   data() {
     return {};
   },
   methods: {
-    commitValue() {
-      console.log("change");
+    commitValue(dropdown) {
+
+      // Object base to dispatch to the store
+      let _tempObj = {
+        name: dropdown.id, // Parse the dropdown id to identify later 
+        value: event.target.value // Parse the selected column to higlight the cells
+      }
+
+      // Calls the createOptions from the store and dispatch the temporal object
+      this.$store.dispatch('createOptions', _tempObj);
     }
   },
   computed: {
@@ -91,3 +109,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+
+  .chart-options{
+    label{
+      display: block;
+      width: 100%;
+      text-transform: capitalize;
+    }
+  }
+
+
+</style>

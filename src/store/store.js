@@ -15,11 +15,13 @@ export const store = new Vuex.Store({
             {
                 name: 'has header',
                 isCheck: false,
+                type: 'checkbox',
                 value: false
             },
             {
                 name: 'check data',
                 isCheck: true,
+                type: 'checkbox',
                 value: true
             }
         ],
@@ -381,6 +383,13 @@ export const store = new Vuex.Store({
                     option.isCheck = payload.value : option.isCheck
             })
         },
+        addOptions(state, payload){
+           const allOptions = state.inputOptions;
+
+           allOptions.push(payload)
+           //allOptions.indexOf(payload.name) === -1 ? allOptions.push(payload) : false
+
+        },
         resetModal(state, payload) {
             state.modalStatus.value = payload;
         }
@@ -420,6 +429,9 @@ export const store = new Vuex.Store({
         },
         updateValues(context, payload) {
             context.commit('updateOptions', payload);
+        },
+        createOptions(context, payload) {
+            context.commit('addOptions', payload);
         },
         closeModal(context, payload) {
             context.commit('resetModal', payload)
