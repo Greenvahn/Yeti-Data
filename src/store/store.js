@@ -49,6 +49,20 @@ export const store = new Vuex.Store({
                     text: 'Launch chart Pie',
                     state: false
                 }
+            ],
+            columnSelector:[
+                {
+                    id: 'labels',
+                    class: 'select',
+                    text: 'First input - Choose your labels',
+                    options: []
+                },
+                {
+                    id: 'values',
+                    class: 'select',
+                    text: 'Second input - Choose your values',
+                    options: []
+                }
             ]
         },
         messages: [

@@ -4,10 +4,10 @@
       <button v-for="(button, index) in giveMeButtons" :key="index">{{button.text}}</button>
     </div>
     <div class="chart-options">
-      <div v-for="(drop,index) in generatedOptions" v-on:change="commitValue()" :key="index" class="select" v-bind:id="'opt'+index">
+      <div v-for="(dropdown,index) in giveMeDropdowns" v-on:change="commitValue()" :key="index" :class="dropdown.class" v-bind:id="dropdown.id">
         <select>
-          <option>Label</option>
-          <option v-for="(option, index) in drop" :key="index">{{option}}</option>
+          <option>{{dropdown.text}}</option>
+          <option v-for="(option, index) in dropdown.options" :key="index">Column {{option}}</option>
         </select>
       </div>
     </div>
@@ -40,6 +40,27 @@ export default {
 
       // Returns array of filterd buttons
       return _filteredButtons;
+    },
+    giveMeDropdowns() {
+      // Generate the dropdowns based of the number of the columns from the table
+
+      // Get the dropdown default data
+      let _dropdownOptions = this.$store.getters.getButtonLib.columnSelector;
+
+      // Retrieve table values
+      const _dataTable = this.$store.getters.getTable;
+      
+      /* Populate the dropdown options 
+      * Iterate through first table row
+      * * Get the index of each item from the first table row and push it into the dropdown options
+      */
+      _dataTable[0].forEach((element, index) => {
+        _dropdownOptions.forEach(element => {
+          element.options.push(index)
+        })
+      });
+
+      return _dropdownOptions;
     },
     generatedOptions(type) {
       const _dataTable = this.$store.getters.getTable;
