@@ -25,6 +25,12 @@ export const store = new Vuex.Store({
                 value: true
             }
         ],
+        minichartOptions:{
+            inputs:{
+                labels: '',
+                values: ''
+            }
+        },
         buttons: {
             typeOfChart: [
                 {
@@ -384,10 +390,23 @@ export const store = new Vuex.Store({
             })
         },
         addOptions(state, payload){
-           const allOptions = state.inputOptions;
+           // Retrieves the current minchart inputs
+            const chartInputs = state.minichartOptions.inputs;
 
-           allOptions.push(payload)
-           //allOptions.indexOf(payload.name) === -1 ? allOptions.push(payload) : false
+            // Creates an array of keys based on minichart inputs object
+            let _inputs = Object.keys(chartInputs)
+
+
+            /* Iterates through each key 
+            * Checks if key matches the payload name
+            * If true, update the value in the charInputs object
+            * Otherwise just return the current value of the chartInpust object
+            */
+            _inputs.forEach(item => {
+                item === payload.name ? chartInputs[payload.name] = payload.value : chartInputs[item]
+            })
+
+
 
         },
         resetModal(state, payload) {
