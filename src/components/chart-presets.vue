@@ -28,15 +28,17 @@ export default {
     buttonChart
   },
   data() {
-    return {};
+    return {
+
+    };
   },
   methods: {
     commitValue(dropdown) {
 
       // Object base to dispatch to the store
       let _tempObj = {
-        name: dropdown.id, // Parse the dropdown id to identify later 
-        value: event.target.value // Parse the selected column to higlight the cells
+        name: dropdown.id, // Parse the dropdown id to identify later --> NAME
+        value: Number(event.target.value.split('').pop()) // Parse the selected column NUMBER -> parse value as a number
       }
 
       // Calls the createOptions from the store and dispatch the temporal object

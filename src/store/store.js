@@ -437,6 +437,9 @@ export const store = new Vuex.Store({
         },
         getButtonLib(state){
             return state.buttons
+        },
+        getMiniChart(state){
+            return state.minichartOptions
         }
     },
     actions: {
