@@ -3,7 +3,7 @@
         <div v-if="dataTable" class="container marging-top">
             <table>
                 <tr v-for="(item, index) in dataTable" v-bind:key="index" v-bind:class="{headerRow : checkHeaderRow('has header', index)}">
-                    <td v-for="(element, index) in item" v-bind:key="index" v-bind:class="{isLabel: isSelected(index, dataLabel), isValue: index === dataValue ? true : false}">{{element}}</td>
+                    <td v-for="(element, index) in item" v-bind:key="index" v-bind:class="{isLabel: isSelected(index, dataLabel), isValue: isSelected(index, dataValue)}">{{element}}</td>
                 </tr>
             </table>
             <chartBoxBar></chartBoxBar>
@@ -58,11 +58,11 @@ export default {
         return this.$store.getters.getTable
         },
         dataLabel(){
-        //get data table
+        //get data label from the store --> minichartoptions
         return this.$store.getters.getMiniChart.inputs.labels
         },
         dataValue(){
-        //get data table
+        //get data value from the store --> minichartoptions
         return this.$store.getters.getMiniChart.inputs.values
         }
     }
