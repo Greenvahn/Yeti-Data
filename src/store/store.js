@@ -426,8 +426,13 @@ export const store = new Vuex.Store({
                 item === payload.name ? chartInputs[payload.name] = payload.value : chartInputs[item]
             });
 
+            /* Validation
+            * Checks if input Labels and input Values are the same --> same column selected
+            * If true --> triggers message modal 4 - Invalid selection
+            *  
+            */
             chartInputs.labels === chartInputs.values ? 
-            [state.modalStatus.id = 'msg4', state.modalStatus.value = true] : 
+                 [state.modalStatus.id = 'msg4', state.modalStatus.value = true] : 
             false
 
 

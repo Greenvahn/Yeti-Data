@@ -90,10 +90,22 @@ table{
         cursor: pointer;
             &:first-child {border-left: none; border-right: 0.5px solid #cecece}
             // &:last-child {border-left: none; border-right: none;}
-            &:hover{ background-color: #cff3e3;}
+            &:hover{ background-color: #cff3e3;
+            }
 
-            &.isLabel{ background-color: #75c1f3;}
-            &.isValue{ background-color: #fdcf38;}
+            &.isLabel{ 
+                background-color: #75c1f3;
+                &:hover{
+                    background-color: #2d85c0;
+                    color: white;
+                }
+            }
+            &.isValue{ 
+                background-color: #fdcf38;
+                &:hover{
+                    background-color: #f3ab04;
+                }
+            }
 
         }
 
