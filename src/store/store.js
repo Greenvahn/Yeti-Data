@@ -155,6 +155,26 @@ export const store = new Vuex.Store({
                 buttons: [
                     { txt: 'OK' }
                 ]
+            },
+            {
+                id: 'msg4',
+                type: 'message is-warning',
+                icon: {
+                    name: 'file-excel',
+                    size: 'fa-2x'
+                },
+                title: 'Invalid selection',
+                msg: [
+                    {
+                        p: 'Labels and values are using the same column input.'
+                    },
+                    {
+                        p: 'Please, select different columns for each of the elements.'
+                    }
+                ],
+                buttons: [
+                    { txt: 'OK' }
+                ]
             }
         ],
         showLaunch: false,
@@ -404,7 +424,11 @@ export const store = new Vuex.Store({
             */
             _inputs.forEach(item => {
                 item === payload.name ? chartInputs[payload.name] = payload.value : chartInputs[item]
-            })
+            });
+
+            chartInputs.labels === chartInputs.values ? 
+            [state.modalStatus.id = 'msg4', state.modalStatus.value = true] : 
+            false
 
 
 
