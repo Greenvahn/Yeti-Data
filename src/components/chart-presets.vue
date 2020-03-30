@@ -1,7 +1,7 @@
 <template>
   <div class="control columns">
     <div class="column is-2 type-chart">
-      <button v-for="(button, index) in giveMeButtons" :key="index">{{button.text}}</button>
+      <button v-for="(button, index) in giveMeButtons" :key="index" @click="whatChart(button.text)">{{button.text}}</button>
     </div>
     <div class="column" v-for="(dropdown,index) in giveMeDropdowns" :key="index">
       <div class="chart-options">
@@ -43,6 +43,10 @@ export default {
 
       // Calls the createOptions from the store and dispatch the temporal object
       this.$store.dispatch('createOptions', _tempObj);
+    },
+    whatChart(value){
+      // Selects the type of chart to launch
+      this.$store.dispatch('addTypeChart', value)
     }
   },
   computed: {

@@ -29,6 +29,10 @@ export const store = new Vuex.Store({
             inputs:{
                 labels: '',
                 values: ''
+            },
+            graphic:{
+                type: '',
+                active: false
             }
         },
         buttons: {
@@ -434,9 +438,10 @@ export const store = new Vuex.Store({
             chartInputs.labels === chartInputs.values ? 
                  [state.modalStatus.id = 'msg4', state.modalStatus.value = true] : 
             false
-
-
-
+        },
+        typeChart(state, payload){
+            state.minichartOptions.graphic.type = payload;
+            state.minichartOptions.graphic.active = true;
         },
         resetModal(state, payload) {
             state.modalStatus.value = payload;
@@ -489,6 +494,9 @@ export const store = new Vuex.Store({
         },
         addChartBar(context, payload) {
             context.commit('showChartBar', payload);
+        },
+        addTypeChart(context, payload) {
+            context.commit('typeChart', payload);
         }
 
     }
