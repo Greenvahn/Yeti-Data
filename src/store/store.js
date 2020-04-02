@@ -50,9 +50,11 @@ export const store = new Vuex.Store({
             loadChart : [
                 {
                     id: 'chart-bar',
-                    class: 'addChartBar',
+                    class: 'button is-primary addChartBar',
                     function: 'loadPresets',
                     text: 'Launch chart',
+                    icon: 'arrow-alt-circle-right',
+                    iconSize: 'fa-2x',
                     state: true
                 },
                 {

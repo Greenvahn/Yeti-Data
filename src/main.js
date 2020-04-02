@@ -4,10 +4,10 @@ import { store } from './store/store.js'
 
 //Font awesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faCloudUploadAlt, faFileImport, faExclamationTriangle, faFileExcel, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faCloudUploadAlt, faFileImport, faExclamationTriangle, faFileExcel, faExclamationCircle, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee, faCloudUploadAlt, faFileImport, faExclamationTriangle, faFileExcel, faExclamationCircle)
+library.add(faCoffee, faCloudUploadAlt, faFileImport, faExclamationTriangle, faFileExcel, faExclamationCircle, faArrowAltCircleRight)
 
 // Register the VUE component globally
 Vue.component('font-awesome-icon', FontAwesomeIcon)

@@ -164,6 +164,12 @@ export default {
   }
 }
 
+.control{
+  width: 100%;
+  margin: 0 auto !important;
+  background: rgba(lightblue, 0.2);
+}
+
 /* Options animation */
 .fadeIn-enter-active{
 animation: fadeInLeft .6s; 
