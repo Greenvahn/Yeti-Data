@@ -33,7 +33,8 @@ export const store = new Vuex.Store({
             graphic:{
                 type: '',
                 active: false
-            }
+            },
+            launcher : false
         },
         buttons: {
             typeOfChart: [
@@ -429,6 +430,13 @@ export const store = new Vuex.Store({
             _inputs.forEach(item => {
                 item === payload.name ? chartInputs[payload.name] = payload.value : chartInputs[item]
             });
+
+            /* Check launch button for minichart
+            * If labels and values are equal numbes --> options have been selected --> lancher button  = true
+            */
+            
+           chartInputs.labels && chartInputs.values ? 
+           state.minichartOptions.launcher = true : state.minichartOptions.launcher = false
 
             /* Validation
             * Checks if input Labels and input Values are the same --> same column selected
