@@ -3,16 +3,18 @@
     <div class="column is-2 type-chart">
       <button v-for="(button, index) in giveMeButtons" :key="index" @click="whatChart(button.text)">{{button.text}}</button>
     </div>
-    <div class="column" v-for="(dropdown,index) in giveMeDropdowns" :key="index">
-      <div class="chart-options">
-      <label>{{dropdown.id}}</label>
-      <div v-on:change="commitValue(dropdown)" :key="index" :class="dropdown.class" v-bind:id="dropdown.id">
-        <select>
-          <option>{{dropdown.text}}</option>
-          <option v-for="(option, index) in dropdown.options" :key="index">Column {{option}}</option>
-        </select>
-      </div>
-      </div>
+    <div class="column wrapper">
+        <div class="column" v-for="(dropdown,index) in giveMeDropdowns" :key="index">
+          <div class="chart-options">
+          <label><span :class="dropdown.id"></span>{{dropdown.id}}</label>
+          <div v-on:change="commitValue(dropdown)" :key="index" :class="dropdown.class" v-bind:id="dropdown.id">
+            <select>
+              <option>{{dropdown.text}}</option>
+              <option v-for="(option, index) in dropdown.options" :key="index">Column {{option}}</option>
+            </select>
+          </div>
+          </div>
+        </div>
     </div>
     <div class="column is-2">
       <buttonChart></buttonChart>
@@ -120,9 +122,21 @@ export default {
 
   .chart-options{
     label{
-      display: block;
+      display: flex;
       width: 100%;
       text-transform: capitalize;
+    }
+    span{
+    width: 10px;
+    height: 25px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+      &.values{
+        background: #fdcf38;
+      }
+      &.labels{
+        background: #75c1f3;
+      }
     }
   }
 
