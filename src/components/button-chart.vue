@@ -22,6 +22,12 @@ export default {
   },
   methods: {
     loadPresets() {
+
+      //get data table
+      let _dataTable = this.$store.getters.getTable;
+
+    
+
       //Show chart
       this.show = !this.show;
       this.$store.dispatch("addChartBar", this.show);

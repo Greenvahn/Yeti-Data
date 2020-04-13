@@ -34,6 +34,10 @@ export const store = new Vuex.Store({
                 type: '',
                 active: false
             },
+            data:{
+                labels: [],
+                values: []
+            },
             launcher : false
         },
         buttons: {
@@ -449,6 +453,15 @@ export const store = new Vuex.Store({
                  [state.modalStatus.id = 'msg4', state.modalStatus.value = true, state.minichartOptions.launcher = false] : 
             false
         },
+        miniChartdata(state, payload){
+           // Retrieves the current minchart inputs
+           const chartData = state.minichartOptions.data;
+
+           payload[0] === 'label' ?
+           state.minichartOptions.data.labels.push(payload[1]) : 
+           state.minichartOptions.data.values.push(payload[1]) 
+
+        },
         typeChart(state, payload){
             state.minichartOptions.graphic.type = payload;
             state.minichartOptions.graphic.active = true;
@@ -507,6 +520,9 @@ export const store = new Vuex.Store({
         },
         addTypeChart(context, payload) {
             context.commit('typeChart', payload);
+        },
+        updateMinichartdata(context, payload){
+            context.commit('miniChartdata', payload)
         }
 
     }
