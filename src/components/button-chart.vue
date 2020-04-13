@@ -5,8 +5,9 @@
       @click="loadPresets"
       :key="index"
       :class="button.class"
-    > <span :class="'file-icon '+button.iconSize">
-      <font-awesome-icon :icon="button.icon" />
+    >
+      <span :class="'file-icon '+button.iconSize">
+        <font-awesome-icon :icon="button.icon" />
       </span>
       {{button.text}}
     </button>
@@ -22,11 +23,29 @@ export default {
   },
   methods: {
     loadPresets() {
-
-      //get data table
+      // get data table
       let _dataTable = this.$store.getters.getTable;
 
-    
+      // get minichartOptions
+      const _miniChartOptions = this.$store.getters.getMiniChart;
+      let _inputValues = _miniChartOptions.inputs.values,
+        _inputLabels = _miniChartOptions.inputs.labels,
+        _dataValues = _miniChartOptions.data.values,
+        _dataLabels = _miniChartOptions.data.labels;
+
+      let tempArray = { values: [], labels: [] };
+
+      _dataTable.forEach((element, index) => {
+        element.forEach((cell, _index) => {
+          _index === _inputLabels
+            ? tempArray.labels.push(cell)
+            : _index === _inputValues
+            ? tempArray.values.push(cell)
+            : false;
+        });
+      });
+
+      this.$store.dispatch('updateMiniChartData', tempArray)
 
       //Show chart
       this.show = !this.show;
@@ -61,7 +80,7 @@ button.addChartBar {
   width: 100%;
   height: 100%;
 
-  .file-icon{
+  .file-icon {
     margin: 0px;
   }
 }

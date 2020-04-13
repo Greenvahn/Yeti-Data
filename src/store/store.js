@@ -186,6 +186,26 @@ export const store = new Vuex.Store({
                 buttons: [
                     { txt: 'OK' }
                 ]
+            },
+            {
+                id: 'msg5',
+                type: 'message is-warning',
+                icon: {
+                    name: 'file-excel',
+                    size: 'fa-2x'
+                },
+                title: 'Invalid selection',
+                msg: [
+                    {
+                        p: 'One of the cells selected as "Values" does not contain numbers.'
+                    },
+                    {
+                        p: 'Please, select a valid column for "Values".'
+                    }
+                ],
+                buttons: [
+                    { txt: 'OK' }
+                ]
             }
         ],
         showLaunch: false,
@@ -454,12 +474,17 @@ export const store = new Vuex.Store({
             false
         },
         miniChartdata(state, payload){
-           // Retrieves the current minchart inputs
-           const chartData = state.minichartOptions.data;
+           // Updates minichart data
+           let tempchartData = payload
 
-           payload[0] === 'label' ?
-           state.minichartOptions.data.labels.push(payload[1]) : 
-           state.minichartOptions.data.values.push(payload[1]) 
+           // Checks if numbers have been chosen to show as values - isNaN
+           // * If true --> triggers message modal 5 - Invalid selection --> launcher button = false
+           tempchartData.values.forEach((element, index) => {
+               isNaN(element) ? [state.modalStatus.id = 'msg5', state.modalStatus.value = true, state.minichartOptions.launcher = false] : false
+           });
+
+           // Pass payload into minichartData
+           state.minichartOptions.data = payload
 
         },
         typeChart(state, payload){
@@ -521,7 +546,7 @@ export const store = new Vuex.Store({
         addTypeChart(context, payload) {
             context.commit('typeChart', payload);
         },
-        updateMinichartdata(context, payload){
+        updateMiniChartData(context, payload){
             context.commit('miniChartdata', payload)
         }
 
