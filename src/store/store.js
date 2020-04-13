@@ -434,7 +434,7 @@ export const store = new Vuex.Store({
             });
 
             /* Check launch button for minichart
-            * If labels and values are equal numbes --> options have been selected --> lancher button  = true
+            * If labels and values are equal numbers --> options have been selected --> launcher button = true
             */
             
            chartInputs.labels && chartInputs.values ? 
@@ -442,11 +442,11 @@ export const store = new Vuex.Store({
 
             /* Validation
             * Checks if input Labels and input Values are the same --> same column selected
-            * If true --> triggers message modal 4 - Invalid selection
+            * If true --> triggers message modal 4 - Invalid selection --> launcher button = false
             *  
             */
             chartInputs.labels === chartInputs.values ? 
-                 [state.modalStatus.id = 'msg4', state.modalStatus.value = true] : 
+                 [state.modalStatus.id = 'msg4', state.modalStatus.value = true, state.minichartOptions.launcher = false] : 
             false
         },
         typeChart(state, payload){

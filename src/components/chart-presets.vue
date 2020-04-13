@@ -95,6 +95,7 @@ export default {
        */
       _dataTable[0].forEach((element, index) => {
         _dropdownOptions.forEach(element => {
+          console.log("Hello", element)
           element.options.push(index);
         });
       });
