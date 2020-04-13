@@ -210,7 +210,6 @@ export const store = new Vuex.Store({
         ],
         showLaunch: false,
         showBarchart: {
-            btn: false,
             graphic: false
         },
         dataFile: null,
@@ -486,6 +485,9 @@ export const store = new Vuex.Store({
            // Pass payload into minichartData
            state.minichartOptions.data = payload
 
+           // Hides launcher when finishes
+           state.minichartOptions.launcher = false
+
         },
         typeChart(state, payload){
             state.minichartOptions.graphic.type = payload;
@@ -514,9 +516,12 @@ export const store = new Vuex.Store({
         getNotificationStatus(state) {
             return state.notificationStatus
         },
-        getChartBar(state) {
+        getChartBarState(state) {
             return state.showBarchart.graphic
         },
+        getDataChart(state) {
+            return state.minichartOptions.data
+        },        
         getButtonLib(state){
             return state.buttons
         },

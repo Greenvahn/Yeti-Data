@@ -45,7 +45,7 @@ export default {
         });
       });
 
-      this.$store.dispatch('updateMiniChartData', tempArray)
+      this.$store.dispatch("updateMiniChartData", tempArray);
 
       //Show chart
       this.show = !this.show;

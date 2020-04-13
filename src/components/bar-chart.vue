@@ -48,7 +48,10 @@ export default {
     },
     computed:{
       showChart(){
-        return this.$store.getters.getChartBar;
+        return this.$store.getters.getChartBarState;
+      },
+      getChartData(){
+        return this.$store.getters.getDataChart;
       }
     }
 };
