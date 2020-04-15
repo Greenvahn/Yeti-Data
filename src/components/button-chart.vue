@@ -33,14 +33,17 @@ export default {
         _dataValues = _miniChartOptions.data.values,
         _dataLabels = _miniChartOptions.data.labels;
 
+      // Creates empty array to store the new values
       let tempArray = { values: [], labels: [] };
 
+      // Iterates through table elements
+      // If matches the input values or input labels from the minichartOptions --> store the value
       _dataTable.forEach((element, index) => {
         element.forEach((cell, _index) => {
           _index === _inputLabels
-            ? tempArray.labels.push(cell)
+            ? tempArray.labels.push(cell) // Stores cell value as labels
             : _index === _inputValues
-            ? tempArray.values.push(cell)
+            ? tempArray.values.push(cell) // Stores cell value as values
             : false;
         });
       });
