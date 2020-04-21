@@ -429,7 +429,11 @@ export const store = new Vuex.Store({
             state.showLaunch = payload
         },
         showChartBar(state, payload) {
+            // Updates showBarchart.graphic => true
             state.showBarchart.graphic = payload
+
+            // Hides the button launcher
+            state.minichartOptions.launcher = false
         },
         updateOptions(state, payload) {
             const allOptions = state.inputOptions;
@@ -460,10 +464,14 @@ export const store = new Vuex.Store({
             * If labels and values are equal numbers --> options have been selected --> launcher button = true
             */
 
-            chartInputs.labels && chartInputs.values ?
+            console.log("----------------------> ", chartInputs.labels, chartInputs.values)
+
+            chartInputs.labels && chartInputs.values ||
+                chartInputs.labels === 0 && chartInputs.values ||
+                chartInputs.labels && chartInputs.values === 0 ?
                 state.minichartOptions.launcher = true : state.minichartOptions.launcher = false
 
-            /* Validation
+            /* =========  Validation =========
             * Checks if input Labels and input Values are the same --> same column selected
             * If true --> triggers message modal 4 - Invalid selection --> launcher button = false
             *  
@@ -511,12 +519,14 @@ export const store = new Vuex.Store({
             // Pass new data into minichartData
             state.minichartOptions.data = tempArray
 
+            // Hides chart
+            state.showBarchart.graphic = false
+
 
         },
-        miniChartdata(state, payload) {
+        miniChartdata(state) {
             // Updates minichart.launcher
             state.minichartOptions.launcher = false
-
         },
 
         typeChart(state, payload) {

@@ -23,8 +23,17 @@ export default {
   },
   methods: {
     loadPresets() {
-      //Show chart
+
+      // Get current graphic state [hidden/shown]
+      this.show = this.$store.getters.getChartBarState;
+
+      // Update on click
       this.show = !this.show;
+
+      // Shows chart
+      this.$store.dispatch("addChartBar", this.show);
+
+      
       this.$store.dispatch("addChartBar", this.show);
     }
   },
