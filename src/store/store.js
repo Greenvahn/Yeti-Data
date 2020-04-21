@@ -25,20 +25,20 @@ export const store = new Vuex.Store({
                 value: true
             }
         ],
-        minichartOptions:{
-            inputs:{
+        minichartOptions: {
+            inputs: {
                 labels: '',
                 values: ''
             },
-            graphic:{
+            graphic: {
                 type: '',
                 active: false
             },
-            data:{
+            data: {
                 labels: [],
                 values: []
             },
-            launcher : false
+            launcher: false
         },
         buttons: {
             typeOfChart: [
@@ -51,7 +51,7 @@ export const store = new Vuex.Store({
                     state: true
                 }
             ],
-            loadChart : [
+            loadChart: [
                 {
                     id: 'chart-bar',
                     class: 'button is-primary addChartBar',
@@ -69,7 +69,7 @@ export const store = new Vuex.Store({
                     state: false
                 }
             ],
-            columnSelector:[
+            columnSelector: [
                 {
                     id: 'labels',
                     class: 'select',
@@ -306,12 +306,12 @@ export const store = new Vuex.Store({
                 /**** EXT ==> NOT Accepted */
                 if (!extensionSuccess) {
                     state.modalStatus.id = 'msg1', //Activate message 1 -> format file
-                    state.modalStatus.value = true
-                } 
+                        state.modalStatus.value = true
+                }
                 /**** FILE SIZE ==> NOT Accepted */
-                else if (_fileSize >= _passMark ){
+                else if (_fileSize >= _passMark) {
                     state.modalStatus.id = 'msg2', //Activate message 2 -> file size
-                    state.modalStatus.value = true
+                        state.modalStatus.value = true
 
                     return false; // Stop process here!
 
@@ -386,7 +386,7 @@ export const store = new Vuex.Store({
 
 
                         // Check if the loop has ended
-                        if(index === (rows.length) - 1){
+                        if (index === (rows.length) - 1) {
 
                             /* 
                             ===== > Shows notification - PROMISE
@@ -396,8 +396,8 @@ export const store = new Vuex.Store({
                             * > For showing -> factor fo 1000 ms
                             * > For hiding -> use a factor of 0.3 ms
                             */
-                            showNotification('msg3', true, _fileSize/2000).then(() => {
-                                showNotification('msg3', false, _fileSize/0.3)
+                            showNotification('msg3', true, _fileSize / 2000).then(() => {
+                                showNotification('msg3', false, _fileSize / 0.3)
                             })
 
                         }
@@ -439,8 +439,8 @@ export const store = new Vuex.Store({
                     option.isCheck = payload.value : option.isCheck
             })
         },
-        addOptions(state, payload){
-           // Retrieves the current minchart inputs
+        addOptions(state, payload) {
+            // Retrieves the current minchart inputs
             const chartInputs = state.minichartOptions.inputs;
 
             // Creates an array of keys based on minichart inputs object
@@ -459,37 +459,67 @@ export const store = new Vuex.Store({
             /* Check launch button for minichart
             * If labels and values are equal numbers --> options have been selected --> launcher button = true
             */
-            
-           chartInputs.labels && chartInputs.values ? 
-           state.minichartOptions.launcher = true : state.minichartOptions.launcher = false
+
+            chartInputs.labels && chartInputs.values ?
+                state.minichartOptions.launcher = true : state.minichartOptions.launcher = false
 
             /* Validation
             * Checks if input Labels and input Values are the same --> same column selected
             * If true --> triggers message modal 4 - Invalid selection --> launcher button = false
             *  
             */
-            chartInputs.labels === chartInputs.values ? 
-                 [state.modalStatus.id = 'msg4', state.modalStatus.value = true, state.minichartOptions.launcher = false] : 
-            false
+            chartInputs.labels === chartInputs.values ?
+                [state.modalStatus.id = 'msg4', state.modalStatus.value = true, state.minichartOptions.launcher = false] :
+                false
+
+            // Checks if numbers have been chosen to show as values - isNaN
+            // * If true --> triggers message modal 5 - Invalid selection --> launcher button = false
+
+
+            // For values column --> if cell values are not numbers --> reject
+            // get data table
+            let _dataTable = state.dataFile
+
+            // get minichartOptions
+            const _miniChartOptions = state.minichartOptions
+            let _inputValues = _miniChartOptions.inputs.values,
+                _inputLabels = _miniChartOptions.inputs.labels,
+                _dataValues = _miniChartOptions.data.values,
+                _dataLabels = _miniChartOptions.data.labels;
+
+            // Creates empty array to store the new values
+            let tempArray = { values: [], labels: [] };
+
+            // Iterates through table elements
+            // If matches the input values or input labels from the minichartOptions --> store the value
+            _dataTable.forEach((element, index) => {
+                element.forEach((cell, _index) => {
+                    _index === _inputLabels
+                        ? tempArray.labels.push(cell) // Stores cell value as labels
+                        : _index === _inputValues
+                            ? tempArray.values.push(cell) // Stores cell value as values
+                            : false;
+                });
+            });
+
+            // Checks if numbers have been chosen to show as values - isNaN
+            // * If true --> triggers message modal 5 - Invalid selection --> launcher button = false
+            tempArray.values.forEach((element, index) => {
+                isNaN(element) ? [state.modalStatus.id = 'msg5', state.modalStatus.value = true, state.minichartOptions.launcher = false] : false
+            });
+
+            // Pass new data into minichartData
+            state.minichartOptions.data = tempArray
+
+
         },
-        miniChartdata(state, payload){
-           // Updates minichart data
-           let tempchartData = payload
-
-           // Checks if numbers have been chosen to show as values - isNaN
-           // * If true --> triggers message modal 5 - Invalid selection --> launcher button = false
-           tempchartData.values.forEach((element, index) => {
-               isNaN(element) ? [state.modalStatus.id = 'msg5', state.modalStatus.value = true, state.minichartOptions.launcher = false] : false
-           });
-
-           // Pass payload into minichartData
-           state.minichartOptions.data = payload
-
-           // Hides launcher when finishes
-           state.minichartOptions.launcher = false
+        miniChartdata(state, payload) {
+            // Updates minichart.launcher
+            state.minichartOptions.launcher = false
 
         },
-        typeChart(state, payload){
+
+        typeChart(state, payload) {
             state.minichartOptions.graphic.type = payload;
             state.minichartOptions.graphic.active = true;
         },
@@ -521,11 +551,11 @@ export const store = new Vuex.Store({
         },
         getDataChart(state) {
             return state.minichartOptions.data
-        },        
-        getButtonLib(state){
+        },
+        getButtonLib(state) {
             return state.buttons
         },
-        getMiniChart(state){
+        getMiniChart(state) {
             return state.minichartOptions
         }
     },
@@ -550,10 +580,11 @@ export const store = new Vuex.Store({
         },
         addTypeChart(context, payload) {
             context.commit('typeChart', payload);
-        },
-        updateMiniChartData(context, payload){
-            context.commit('miniChartdata', payload)
         }
+        // ,
+        // updateMiniChartData(context, payload) {
+        //     context.commit('miniChartdata', payload)
+        // }
 
     }
 })
