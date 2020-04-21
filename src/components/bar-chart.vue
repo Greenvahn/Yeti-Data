@@ -1,7 +1,7 @@
 <template>
   <div class="container chart-area">
       <div class="chart-wrap" v-if="showChart">
-        <div v-for="(obj) in getChartData" class="wrap-figure" v-bind:key="obj.values">
+        <div v-for="(obj) in getChartData" class="wrap-figure" v-bind:key="obj.labels">
           <div class="bar" v-bind:style="{width: [(obj.values/100)*100] +'px'}"></div>
           <span class="label">{{obj.values}} - {{obj.labels}}</span>
         </div>
