@@ -34,6 +34,10 @@ export const store = new Vuex.Store({
                 type: '',
                 active: false
             },
+            data:{
+                labels: [],
+                values: []
+            },
             launcher : false
         },
         buttons: {
@@ -182,11 +186,30 @@ export const store = new Vuex.Store({
                 buttons: [
                     { txt: 'OK' }
                 ]
+            },
+            {
+                id: 'msg5',
+                type: 'message is-warning',
+                icon: {
+                    name: 'file-excel',
+                    size: 'fa-2x'
+                },
+                title: 'Invalid selection',
+                msg: [
+                    {
+                        p: 'One of the cells selected as "Values" does not contain numbers.'
+                    },
+                    {
+                        p: 'Please, select a valid column for "Values".'
+                    }
+                ],
+                buttons: [
+                    { txt: 'OK' }
+                ]
             }
         ],
         showLaunch: false,
         showBarchart: {
-            btn: false,
             graphic: false
         },
         dataFile: null,
@@ -434,7 +457,7 @@ export const store = new Vuex.Store({
             });
 
             /* Check launch button for minichart
-            * If labels and values are equal numbes --> options have been selected --> lancher button  = true
+            * If labels and values are equal numbers --> options have been selected --> launcher button = true
             */
             
            chartInputs.labels && chartInputs.values ? 
@@ -442,12 +465,29 @@ export const store = new Vuex.Store({
 
             /* Validation
             * Checks if input Labels and input Values are the same --> same column selected
-            * If true --> triggers message modal 4 - Invalid selection
+            * If true --> triggers message modal 4 - Invalid selection --> launcher button = false
             *  
             */
             chartInputs.labels === chartInputs.values ? 
-                 [state.modalStatus.id = 'msg4', state.modalStatus.value = true] : 
+                 [state.modalStatus.id = 'msg4', state.modalStatus.value = true, state.minichartOptions.launcher = false] : 
             false
+        },
+        miniChartdata(state, payload){
+           // Updates minichart data
+           let tempchartData = payload
+
+           // Checks if numbers have been chosen to show as values - isNaN
+           // * If true --> triggers message modal 5 - Invalid selection --> launcher button = false
+           tempchartData.values.forEach((element, index) => {
+               isNaN(element) ? [state.modalStatus.id = 'msg5', state.modalStatus.value = true, state.minichartOptions.launcher = false] : false
+           });
+
+           // Pass payload into minichartData
+           state.minichartOptions.data = payload
+
+           // Hides launcher when finishes
+           state.minichartOptions.launcher = false
+
         },
         typeChart(state, payload){
             state.minichartOptions.graphic.type = payload;
@@ -476,9 +516,12 @@ export const store = new Vuex.Store({
         getNotificationStatus(state) {
             return state.notificationStatus
         },
-        getChartBar(state) {
+        getChartBarState(state) {
             return state.showBarchart.graphic
         },
+        getDataChart(state) {
+            return state.minichartOptions.data
+        },        
         getButtonLib(state){
             return state.buttons
         },
@@ -507,6 +550,9 @@ export const store = new Vuex.Store({
         },
         addTypeChart(context, payload) {
             context.commit('typeChart', payload);
+        },
+        updateMiniChartData(context, payload){
+            context.commit('miniChartdata', payload)
         }
 
     }

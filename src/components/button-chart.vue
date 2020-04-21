@@ -5,8 +5,9 @@
       @click="loadPresets"
       :key="index"
       :class="button.class"
-    > <span :class="'file-icon '+button.iconSize">
-      <font-awesome-icon :icon="button.icon" />
+    >
+      <span :class="'file-icon '+button.iconSize">
+        <font-awesome-icon :icon="button.icon" />
       </span>
       {{button.text}}
     </button>
@@ -22,6 +23,33 @@ export default {
   },
   methods: {
     loadPresets() {
+      // get data table
+      let _dataTable = this.$store.getters.getTable;
+
+      // get minichartOptions
+      const _miniChartOptions = this.$store.getters.getMiniChart;
+      let _inputValues = _miniChartOptions.inputs.values,
+        _inputLabels = _miniChartOptions.inputs.labels,
+        _dataValues = _miniChartOptions.data.values,
+        _dataLabels = _miniChartOptions.data.labels;
+
+      // Creates empty array to store the new values
+      let tempArray = { values: [], labels: [] };
+
+      // Iterates through table elements
+      // If matches the input values or input labels from the minichartOptions --> store the value
+      _dataTable.forEach((element, index) => {
+        element.forEach((cell, _index) => {
+          _index === _inputLabels
+            ? tempArray.labels.push(cell) // Stores cell value as labels
+            : _index === _inputValues
+            ? tempArray.values.push(cell) // Stores cell value as values
+            : false;
+        });
+      });
+
+      this.$store.dispatch("updateMiniChartData", tempArray);
+
       //Show chart
       this.show = !this.show;
       this.$store.dispatch("addChartBar", this.show);
@@ -55,7 +83,7 @@ button.addChartBar {
   width: 100%;
   height: 100%;
 
-  .file-icon{
+  .file-icon {
     margin: 0px;
   }
 }

@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     commitValue(name, value) {
-      //this.$store.commit("updateOptions", { name, value });
       this.$store.dispatch('updateValues', { name, value });
     }
   },
