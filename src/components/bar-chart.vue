@@ -1,13 +1,11 @@
 <template>
   <div class="container chart-area">
-    <transition name="showChartIn">
       <div class="chart-wrap" v-if="showChart">
         <div v-for="(obj, index) in getChartData" class="wrap-figure" v-bind:key="{index}">
           <div class="bar" v-bind:style="{width: [(obj.values/100)*100] +'px'}"></div>
           <span class="label">{{obj.values}} - {{obj.labels}}</span>
         </div>
       </div>
-    </transition>
   </div>
 </template>
 <script>
@@ -74,23 +72,4 @@ export default {
   }
 }
 
-/* Table animation */
-.showChartIn-enter-active {
-  animation: showChartIn 4s;
-}
-
-.showChartIn-leave-active {
-  animation: showChartIn 0.4s reverse;
-}
-
-@keyframes showChartIn {
-  0% {
-    opacity: 0;
-    width: 1%;
-  }
-  100% {
-    opacity: 1;
-    width: 100%;
-  }
-}
 </style>
