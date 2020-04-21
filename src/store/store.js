@@ -535,6 +535,14 @@ export const store = new Vuex.Store({
         },
         resetModal(state, payload) {
             state.modalStatus.value = payload;
+        },
+        resetAll(state, payload){
+            state.minichartOptions.launcher = payload; // button launcher
+            state.minichartOptions.graphic.active = payload; // minichart options
+            state.modalStatus.value = payload; // modals
+            state.showBarchart.graphic = payload; // hides chart
+            state.minichartOptions.inputs.labels = ""; // Empties all mninichart labels
+            state.minichartOptions.inputs.values = ""; // Empties all mninichart values
         }
     },
     getters: {
@@ -590,6 +598,9 @@ export const store = new Vuex.Store({
         },
         addTypeChart(context, payload) {
             context.commit('typeChart', payload);
+        },
+        reset(context, payload) {
+            context.commit('resetAll', payload);
         }
         // ,
         // updateMiniChartData(context, payload) {

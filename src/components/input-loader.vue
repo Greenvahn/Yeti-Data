@@ -77,7 +77,6 @@ export default {
       if (this.selectedFile) {
         // 1 – change button LAUNCH state --> (show)
         this.$store.dispatch("addLaunchBtn", this.showLaunch = true);
-
       }
     },
     launchData() {
@@ -111,6 +110,9 @@ export default {
             "color:white; background-color:red"
           );
         });
+
+
+        this.$store.dispatch("reset", false);
     }
   },
   computed: {
