@@ -5,7 +5,12 @@
         v-for="(button, index) in giveMeButtons"
         :key="index"
         @click="whatChart(button.text)"
-      >{{button.text}}</button>
+        :class="[button.class, {visited: visited}]"
+      >
+        <span :class="'file-icon '+button.icon.size" v-if="button.icon">
+          <font-awesome-icon :icon="button.icon.name" />
+        </span>
+      </button>
     </div>
 
     <div class="column" v-for="(dropdown,index) in giveMeDropdowns" :key="index">
@@ -32,7 +37,7 @@
 
     <div class="column is-2">
       <transition name="fadeInLeft">
-      <buttonChart v-if="showLaunchMiniChart"></buttonChart>
+        <buttonChart v-if="showLaunchMiniChart"></buttonChart>
       </transition>
     </div>
   </div>
@@ -46,7 +51,11 @@ export default {
     buttonChart
   },
   data() {
-    return {};
+    return {
+      visited: false,
+      disabled: false,
+      clicked: []
+    };
   },
   methods: {
     commitValue(dropdown) {
@@ -59,9 +68,15 @@ export default {
       // Calls the createOptions from the store and dispatch the temporal object
       this.$store.dispatch("createOptions", _tempObj);
     },
-    whatChart(value) {
-      // Selects the type of chart to launch
+    whatChart(value, event) {
+
+      // Add visited status and disable status
+      this.visited = this.disabled = true;
+
+      // Activate the chart
       this.$store.dispatch("addTypeChart", value);
+
+
     }
   },
   computed: {
@@ -133,17 +148,54 @@ export default {
 
       return isChartTypeSelected;
     },
-    showLaunchMiniChart(){
+    showLaunchMiniChart() {
       // Is mini chart launcher activated?
-      let isMiniChartLauncher = this.$store.getters.getMiniChart.launcher
+      let isMiniChartLauncher = this.$store.getters.getMiniChart.launcher;
 
-      return isMiniChartLauncher
+      return isMiniChartLauncher;
     }
   }
 };
 </script>
 
 <style lang="scss">
+.show-presets {
+  opacity: 0.8;
+  padding: 20px;
+  background: transparent;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid #3273dc;
+  cursor: pointer;
+  transition: all .1s ease-in;
+  span {
+    margin: 0px;
+  }
+
+  svg {
+    color: #3273dc;
+  }
+
+  &:hover{
+    opacity: 1;
+    background-color:#3273dc;
+    svg {
+      color: #FFF;
+    }
+  }
+
+  &:focus{
+    outline: none;
+  }
+
+  &.visited {
+    opacity: 0.1;
+    pointer-events: none;
+  }
+}
+
 .chart-options {
   label {
     display: flex;
@@ -164,30 +216,29 @@ export default {
   }
 }
 
-.control{
+.control {
   width: 100%;
   margin: 0 auto !important;
   background: rgba(lightblue, 0.2);
 }
 
 /* Options animation */
-.fadeIn-enter-active{
-animation: fadeInLeft .6s; 
+.fadeIn-enter-active {
+  animation: fadeInLeft 0.6s;
 }
 
-.fadeIn-leave-active{
-animation: fadeInLeft .4s reverse;
+.fadeIn-leave-active {
+  animation: fadeInLeft 0.4s reverse;
 }
 
-
-@keyframes fadeInLeft{
-  0%{
+@keyframes fadeInLeft {
+  0% {
     opacity: 0;
     margin-left: -10px;
   }
-  100%{
+  100% {
     opacity: 1;
-     margin-left: 0px;
+    margin-left: 0px;
   }
 }
 </style>
