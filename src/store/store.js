@@ -43,11 +43,12 @@ export const store = new Vuex.Store({
         buttons: {
             typeOfChart: [
                 {
-                    text: 'Bars',
-                    state: true
-                },
-                {
-                    text: 'Pie',
+                    text: 'Chart',
+                    class: 'show-presets',
+                    icon: {
+                        name: 'chart-line',
+                        size: 'fa-2x'
+                    },
                     state: true
                 }
             ],
