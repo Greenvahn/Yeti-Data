@@ -1,16 +1,21 @@
 <template>
   <div class="control columns">
-    <div class="column is-2 type-chart">
-      <button
-        v-for="(button, index) in giveMeButtons"
-        :key="index"
-        @click="whatChart(button.text)"
-        :class="[button.class, {visited: visited}]"
-      >
-        <span :class="'file-icon '+button.icon.size" v-if="button.icon">
-          <font-awesome-icon :icon="button.icon.name" />
-        </span>
-      </button>
+    <div class="column is-2">
+      <div class="wrap-instructions">
+        <button
+          v-for="(button, index) in giveMeButtons"
+          :key="index"
+          @click="whatChart(button.text)"
+          :class="[button.class, {visited: visited}]"
+        >
+          <span :class="'file-icon '+button.icon.size" v-if="button.icon">
+            <font-awesome-icon :icon="button.icon.name" />
+          </span>
+        </button>
+        <div
+          class="inst-txt"
+        >Here you can select the presets of the chart. You will be able to select a column for labels and other for values. Start by pressing the button on the left of this text.</div>
+      </div>
     </div>
 
     <div class="column" v-for="(dropdown,index) in giveMeDropdowns" :key="index">
@@ -69,14 +74,11 @@ export default {
       this.$store.dispatch("createOptions", _tempObj);
     },
     whatChart(value, event) {
-
       // Add visited status and disable status
       this.visited = this.disabled = true;
 
       // Activate the chart
       this.$store.dispatch("addTypeChart", value);
-
-
     }
   },
   computed: {
@@ -159,6 +161,22 @@ export default {
 </script>
 
 <style lang="scss">
+.wrap-instructions {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: left;
+  max-height: 72px;
+}
+
+.inst-txt {
+    border-left: 2px solid #3273dc;
+    padding: 0px 10px;
+    margin-left: 20px;
+    display: flex;
+    text-align: left;
+    color: #3273dc;
+}
+
 .show-presets {
   opacity: 0.8;
   padding: 20px;
@@ -169,7 +187,7 @@ export default {
   align-items: center;
   border: 3px solid #3273dc;
   cursor: pointer;
-  transition: all .1s ease-in;
+  transition: all 0.1s ease-in;
   span {
     margin: 0px;
   }
@@ -178,15 +196,15 @@ export default {
     color: #3273dc;
   }
 
-  &:hover{
+  &:hover {
     opacity: 1;
-    background-color:#3273dc;
+    background-color: #3273dc;
     svg {
-      color: #FFF;
+      color: #fff;
     }
   }
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 
