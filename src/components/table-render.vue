@@ -108,7 +108,7 @@ table {
       }
       // &:last-child {border-left: none; border-right: none;}
       &:hover {
-        background-color: #cff3e3;
+        background-color: #e3f4ff;
       }
 
       &.isLabel {
