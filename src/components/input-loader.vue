@@ -12,7 +12,7 @@
               <span class="file-icon">
                 <font-awesome-icon icon="cloud-upload-alt" />
               </span>
-              <span class="file-label">Browse</span>
+              <span class="file">Browse</span>
             </span>
             <span class="file-name">{{fileName}}</span>
           </label>
@@ -137,6 +137,10 @@ input[type="file"] {
 
 .container {
   max-width: 500px;
+}
+
+.file-label{
+  background: white;
 }
 
 </style>

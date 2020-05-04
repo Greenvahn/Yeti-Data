@@ -87,28 +87,28 @@ export default {
 }
 
 table {
-  border: 1px solid #999;
+  border: 1px solid #cecece;
   background: white;
   width: 100%;
   margin-bottom: 50px;
   tr {
-    border-bottom: 1px solid #cecece;
+    // border-bottom: 1px solid #cecece;
     &:nth-child(odd) {
-      background-color: #f5f5f5;
+      background-color: #f5f5f5b5;
     }
 
     td {
       font-size: 12px;
-      border-right: 0.5px solid #cecece;
+      //border-right: 0.5px solid #cecece;
       padding: 5px;
       cursor: pointer;
       &:first-child {
         border-left: none;
-        border-right: 0.5px solid #cecece;
+       // border-right: 0.5px solid #cecece;
       }
       // &:last-child {border-left: none; border-right: none;}
       &:hover {
-        background-color: #cff3e3;
+        background-color: #e3f4ff;
       }
 
       &.isLabel {
@@ -121,7 +121,8 @@ table {
       &.isValue {
         background-color: #fdcf38;
         &:hover {
-          background-color: #f3ab04;
+          background-color: #dc9a01;
+          color: white
         }
       }
     }
