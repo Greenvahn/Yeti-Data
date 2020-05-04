@@ -14,6 +14,7 @@
         </button>
         <div
           class="inst-txt"
+          v-if="showInstructions"
         >Here you can select the presets of the chart. You will be able to select a column for labels and other for values. Start by pressing the button on the left of this text.</div>
       </div>
     </div>
@@ -59,6 +60,7 @@ export default {
     return {
       visited: false,
       disabled: false,
+      showInstructions : true,
       clicked: []
     };
   },
@@ -76,6 +78,9 @@ export default {
     whatChart(value, event) {
       // Add visited status and disable status
       this.visited = this.disabled = true;
+
+      // Hide intructions
+      this.showInstructions = false;
 
       // Activate the chart
       this.$store.dispatch("addTypeChart", value);
@@ -170,11 +175,14 @@ export default {
 
 .inst-txt {
     border-left: 2px solid #3273dc;
-    padding: 0px 10px;
-    margin-left: 20px;
+    padding: 0px 25px;
     display: flex;
     text-align: left;
     color: #3273dc;
+    position: absolute;
+    width: 80%;
+    height: 75%;
+    left: 10%;
 }
 
 .show-presets {
