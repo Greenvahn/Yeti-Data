@@ -2,8 +2,9 @@
   <div class="container chart-area">
       <div class="chart-wrap" v-if="showChart">
         <div v-for="(obj) in getChartData" class="wrap-figure" v-bind:key="obj.labels">
+          <span class="label-txt">{{obj.labels}}</span>
           <div class="bar" v-bind:style="{width: [(obj.values/100)*100] +'px'}"></div>
-          <span class="label">{{obj.values}} - {{obj.labels}}</span>
+          <span class="value-txt">{{obj.values}}</span>
         </div>
       </div>
   </div>
@@ -48,13 +49,15 @@ export default {
   flex-direction: column;
   align-self: center;
   padding: 20px;
+  margin-top: 20px;
   background: rgba(173, 216, 230, 0.2);
   width: 100%;
   .wrap-figure {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 2px 0px 2px 10px;
+    padding: 5px;
+    border-bottom: 1px solid #cecece;
 
     .bar {
       background-color: #75c1f3;
@@ -64,10 +67,12 @@ export default {
       transition: all 0.8s ease-in;
     }
 
-    .label {
+    .label-txt {
       font-size: 12px;
-      padding-left: 20px;
+      margin: 0px 20px;
       color: hsl(217, 71%, 53%);
+      width: 10%;
+      min-height: 38px;
     }
   }
 }
