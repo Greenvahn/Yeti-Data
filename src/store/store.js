@@ -47,7 +47,7 @@ export const store = new Vuex.Store({
                     class: 'show-presets',
                     icon: {
                         name: 'chart-line',
-                        size: 'fa-2x'
+                        size: 'fa-3x'
                     },
                     state: true
                 }

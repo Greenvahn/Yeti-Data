@@ -45,6 +45,8 @@ export default {
 <style lang="scss">
    @import 'bulma';
 
+
+
    html, body{
      height: 100%;
    }
@@ -53,6 +55,7 @@ export default {
      display: flex;
      flex-direction: column;
      justify-content: center;
+     background: #f7fafc;
    }
 
    #app{

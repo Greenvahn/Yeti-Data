@@ -12,10 +12,12 @@
             <font-awesome-icon :icon="button.icon.name" />
           </span>
         </button>
-        <div
-          class="inst-txt"
-          v-if="showInstructions"
-        >Here you can select the presets of the chart. You will be able to select a column for labels and other for values. Start by pressing the button on the left of this text.</div>
+        <div class="inst-txt" v-if="showInstructions">
+          <p>Here you can select the presets of the chart. You will be able to select a column for labels and other for values.</p>
+          <p>
+            <b>Start by pressing the button on the left of this text.</b>
+          </p>
+        </div>
       </div>
     </div>
 
@@ -41,7 +43,7 @@
       </transition>
     </div>
 
-    <div class="column is-2">
+    <div class="column">
       <transition name="fadeInLeft">
         <buttonChart v-if="showLaunchMiniChart"></buttonChart>
       </transition>
@@ -60,7 +62,7 @@ export default {
     return {
       visited: false,
       disabled: false,
-      showInstructions : true,
+      showInstructions: true,
       clicked: []
     };
   },
@@ -174,26 +176,33 @@ export default {
 }
 
 .inst-txt {
-    border-left: 2px solid #3273dc;
-    padding: 0px 25px;
-    display: flex;
-    text-align: left;
-    color: #3273dc;
-    position: absolute;
-    width: 80%;
-    height: 75%;
-    left: 10%;
+  padding: 8px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  width: 80%;
+  height: 75%;
+  left: 20%;
+
+  p{
+  text-align: left;
+  color: #3298dc;
+  margin-bottom: 2px;
+  }
 }
 
 .show-presets {
+  width: 100%;
+  height: 75px;
   opacity: 0.8;
-  padding: 20px;
+  padding: 15px 35px;
   background: transparent;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid #3273dc;
+  border: 2px solid #3298dc;
   cursor: pointer;
   transition: all 0.1s ease-in;
   span {
@@ -201,12 +210,12 @@ export default {
   }
 
   svg {
-    color: #3273dc;
+    color: #3298dc;
   }
 
   &:hover {
     opacity: 1;
-    background-color: #3273dc;
+    background-color: #3298dc;
     svg {
       color: #fff;
     }
@@ -217,7 +226,7 @@ export default {
   }
 
   &.visited {
-    opacity: 0.1;
+    opacity: 0.3;
     pointer-events: none;
   }
 }
@@ -244,8 +253,15 @@ export default {
 
 .control {
   width: 100%;
+  height: 8%;
+  align-items: center;
   margin: 0 auto !important;
-  background: rgba(lightblue, 0.2);
+  background: white;
+  border-radius: 5px;
+  border: 0.5px solid #e2e2e2;
+  -webkit-box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.06);
 }
 
 /* Options animation */
