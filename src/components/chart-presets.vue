@@ -249,16 +249,22 @@ export default {
       background: #75c1f3;
     }
   }
+
+
+  select{
+    width: 300px;
+  }
 }
 
 .control {
   width: 100%;
-  height: 8%;
+  height: auto;
+  padding: 20px;
   align-items: center;
   margin: 0 auto !important;
   background: white;
   border-radius: 5px;
-  border: 0.5px solid #e2e2e2;
+  border: 0.5px solid rgba($color: #e2e2e2, $alpha: 0.6);
   -webkit-box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.06);
   -moz-box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.06);
   box-shadow: 0px 5px 2px -3px rgba(0, 0, 0, 0.06);
