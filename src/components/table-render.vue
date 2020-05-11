@@ -87,20 +87,27 @@ export default {
 }
 
 table {
-  border: 1px solid #cecece;
-  background: white;
+  //border: 1px solid #cecece;
+  // background: white;
   width: 100%;
   margin-bottom: 50px;
   tr {
     // border-bottom: 1px solid #cecece;
-    &:nth-child(odd) {
-      background-color: #f5f5f5b5;
+    // &:nth-child(odd) {
+    //   background-color: #f5f5f5b5;
+    // }
+
+    border-bottom: 1px solid rgba($color: #2d85c0, $alpha: 0.1);
+    padding-bottom: 20px;
+
+    &:last-of-type{
+      border: none;
     }
 
     td {
       font-size: 12px;
       //border-right: 0.5px solid #cecece;
-      padding: 5px;
+      padding: 10px 10px 15px 10px;
       cursor: pointer;
       &:first-child {
         border-left: none;
@@ -112,16 +119,16 @@ table {
       }
 
       &.isLabel {
-        background-color: #75c1f3;
+        background-color: #c5e8ff;
         &:hover {
-          background-color: #2d85c0;
+          background-color: #75c1f3;
           color: white;
         }
       }
       &.isValue {
-        background-color: #fdcf38;
+        background-color: rgba($color: #fdcf38, $alpha: 0.3);
         &:hover {
-          background-color: #dc9a01;
+          background-color: #fdcf38;
           color: white
         }
       }

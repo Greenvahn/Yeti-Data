@@ -74,13 +74,13 @@ export const store = new Vuex.Store({
                 {
                     id: 'labels',
                     class: 'select',
-                    text: 'First input - Choose your labels',
+                    text: 'Select your labels',
                     options: []
                 },
                 {
                     id: 'values',
                     class: 'select',
-                    text: 'Second input - Choose your values',
+                    text: 'Select your values (only numbers)',
                     options: []
                 }
             ]
