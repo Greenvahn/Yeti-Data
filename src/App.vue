@@ -3,9 +3,6 @@
   <div class="main">
     <h1>{{title}}</h1>
     <p class="desc">{{description}}</p>
-    <div class="message is-info">
-      <div class="message-body">{{instruction}}</div>
-    </div>
     <input-loader></input-loader>
   </div>
     <table-render></table-render>
@@ -28,9 +25,6 @@ export default {
     methods:{
     },
   computed: {
-    instruction(){ // get instructions from the store.js
-      return this.$store.state.instructions.main
-    },
     title(){ // get title from the store.js
       return this.$store.state.title
     },

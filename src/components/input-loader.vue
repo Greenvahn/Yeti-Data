@@ -1,5 +1,8 @@
 <template>
 <div class="launcher">
+    <div class="message is-info">
+      <div class="message-body">{{instructionMsg}}</div>
+    </div>
 
     <options-loader v-if="renderButton"></options-loader>
 
@@ -116,6 +119,9 @@ export default {
     }
   },
   computed: {
+    instructionMsg(){ // get instructions from the store.js
+      return this.$store.state.instructions.main
+    },
     instruction() {
       return this.$store.state.instructions.button.toUpperCase();
     },
