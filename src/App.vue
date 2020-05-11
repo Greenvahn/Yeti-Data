@@ -1,81 +1,87 @@
 <template>
   <div id="app">
-  <div class="main">
-    <h1>{{title}}</h1>
-    <p class="desc">{{description}}</p>
-    <input-loader></input-loader>
-  </div>
-    <table-render></table-render>
+    <div class="main">
+      <headerPage></headerPage>
+      <input-loader></input-loader>
+      <table-render></table-render>
+    </div>
     <modal-message></modal-message>
   </div>
 </template>
 
 <script>
-import inputLoader from './components/input-loader.vue'
-import tableRender from './components/table-render.vue'
-import modalMessage from './components/modal-msg.vue'
+import inputLoader from "./components/input-loader.vue";
+import tableRender from "./components/table-render.vue";
+import modalMessage from "./components/modal-msg.vue";
+import headerPage from "./components/header-page.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     inputLoader,
     tableRender,
-    modalMessage
+    modalMessage,
+    headerPage
   },
-    methods:{
-    },
+  methods: {},
   computed: {
-    title(){ // get title from the store.js
-      return this.$store.state.title
+    title() {
+      // get title from the store.js
+      return this.$store.state.title;
     },
-    description(){ // get description from the store.js
-      return this.$store.state.description
+    description() {
+      // get description from the store.js
+      return this.$store.state.description;
     }
   }
-}
+};
 </script>
 
 
 <style lang="scss">
-   @import 'bulma';
+@import "bulma";
 
+html,
+body {
+  height: 100%;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f7fafc;
+}
 
-   html, body{
-     height: 100%;
-   }
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 
-   body{
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     background: #f7fafc;
-   }
-
-   #app{
-     width: 100%;
-     height: 100%;
-     margin: 0 auto;
-
-        .main{
-            margin: 0 auto;
-            width: 100%;
-            height: 100%;
-            max-width: 900px;
-            max-height: 300px;
-          .message{max-width: 845px;}
-        }
-
-   }
-
-
-  h1{
-    font-size: 2.5em;
-    margin-bottom: 20px;
+  .main {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    // max-width: 900px;
+    // max-height: 300px;
+    .message {
+      max-width: 845px;
+    }
   }
+}
 
-  p{
-    margin-bottom: 10px;
-    &.desc{margin-bottom: 50px;}
-  }
+.launcher,
+.main-text {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  max-width: 990px;
+}
+
+.tablewrap{
+  width: 100%;
+  // height: auto;
+  // margin: 0 auto;
+  max-width: 1200px;
+}
 </style>

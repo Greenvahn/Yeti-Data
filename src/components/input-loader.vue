@@ -1,44 +1,49 @@
 <template>
-<div class="launcher">
-    <div class="message is-info">
-      <div class="message-body">{{instructionMsg}}</div>
+  <div class="wrap-text-launcher">
+
+    <div class="main-text">
+      <div v-for="(section, index) in mainText" :class="section.type" :key="index">
+        <p v-for="(text, index) in section.content" :class="text.class" :key="index">{{text.p}}</p>
+      </div>
     </div>
 
-    <options-loader v-if="renderButton"></options-loader>
+    <div class="launcher">
+      <div class="message is-info">
+        <div class="message-body">{{instructionMsg}}</div>
+      </div>
 
-    <div class="columns">
-      <div class="column is-four-fifths">
-        <div class="file has-name is-right is-fullwidth">
-          <label class="file-label">
-            <input class="input" type="file" v-on:change="loadFile" />
-            <span class="file-cta">
-              <span class="file-icon">
-                <font-awesome-icon icon="cloud-upload-alt" />
+      <options-loader v-if="renderButton"></options-loader>
+
+      <div class="columns">
+        <div class="column is-four-fifths">
+          <div class="file has-name is-right is-fullwidth">
+            <label class="file-label">
+              <input class="input" type="file" v-on:change="loadFile" />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <font-awesome-icon icon="cloud-upload-alt" />
+                </span>
+                <span class="file">Browse</span>
               </span>
-              <span class="file">Browse</span>
-            </span>
-            <span class="file-name">{{fileName}}</span>
-          </label>
+              <span class="file-name">{{fileName}}</span>
+            </label>
+          </div>
+        </div>
+        <div class="column is-one-fifths">
+          <button class="button is-primary" @click="launchData" v-if="renderButton">{{instruction}}</button>
         </div>
       </div>
-      <div class="column is-one-fifths">
-        <button
-          class="button is-primary"
-          @click="launchData"
-          v-if="renderButton"
-        >{{instruction}}</button>
-      </div>
+
+      <notification-loader></notification-loader>
     </div>
 
-    <notification-loader></notification-loader>
-
-</div>
+  </div>
 </template>
 
 <script>
 // Import options from external component
-import optionsLoader from "./input-options.vue"
-import notificationLoader from "./notification-msg.vue"
+import optionsLoader from "./input-options.vue";
+import notificationLoader from "./notification-msg.vue";
 
 export default {
   name: "inputLoader",
@@ -59,7 +64,7 @@ export default {
     loadFile(event) {
       // Empties table -- Sets to null the data file from the store --> hides table
       // * Call action 'addFile' from the store
-      this.$store.dispatch('addFile', null);
+      this.$store.dispatch("addFile", null);
 
       // Updates the file name on input onChange
       this.fileName = event.target.files[0].name;
@@ -79,7 +84,7 @@ export default {
       // If TRUE - file loaded
       if (this.selectedFile) {
         // 1 – change button LAUNCH state --> (show)
-        this.$store.dispatch("addLaunchBtn", this.showLaunch = true);
+        this.$store.dispatch("addLaunchBtn", (this.showLaunch = true));
       }
     },
     launchData() {
@@ -91,12 +96,15 @@ export default {
       (reader.onload = event => {
         //If reader successful
         if (reader.result) {
-
           // commit data to the store.js --> loadDataFile function
-          this.$store.dispatch('addFile', {result: event.target.result, name: this.fileName, size: this.fileSize});
+          this.$store.dispatch("addFile", {
+            result: event.target.result,
+            name: this.fileName,
+            size: this.fileSize
+          });
 
           // change button LAUNCH state to FALSE after launch --> (hide)
-          this.$store.dispatch('addLaunchBtn', this.showLaunch = false);
+          this.$store.dispatch("addLaunchBtn", (this.showLaunch = false));
 
           // report
           console.log(
@@ -114,26 +122,30 @@ export default {
           );
         });
 
-
-        this.$store.dispatch("reset", false);
+      this.$store.dispatch("reset", false);
     }
   },
   computed: {
-    instructionMsg(){ // get instructions from the store.js
-      return this.$store.state.instructions.main
+    instructionMsg() {
+      // get instructions from the store.js
+      return this.$store.state.instructions.main;
     },
     instruction() {
       return this.$store.state.instructions.button.toUpperCase();
     },
     renderButton() {
       return this.$store.getters.getButton;
+    },
+    mainText() {
+      // get description from the store.js
+      return this.$store.state.mainText;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.launcher{
+.launcher, .main-text {
   margin-top: 50px;
 }
 
@@ -145,8 +157,33 @@ input[type="file"] {
   max-width: 500px;
 }
 
-.file-label{
+.file-label {
   background: white;
 }
 
+.introduction,
+.information {
+  p {
+    &.title {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    &.info-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    &.align-center {
+      text-align: center;
+    }
+  }
+}
+
+.introduction{
+  margin-top: 50px;
+}
+
+.information{
+  margin: 50px 0px 75px 0px;
+}
 </style>

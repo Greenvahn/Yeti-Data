@@ -1,4 +1,5 @@
 <template>
+<div class="notification-holder">
   <transition name="fadeInLeft">
     <div
       v-if="notificationStatus"
@@ -13,6 +14,7 @@
       </div>
     </div>
   </transition>
+  </div>
 </template>
 <script>
 export default {
@@ -50,6 +52,14 @@ export default {
 </script>
 
 <style lang="scss">
+.notification-holder{
+  margin-top: 20px;
+  padding: 20px 0px;
+  display: block;
+  height: 80px;
+  background: transparent
+}
+
 .container {
   &.note-wrap {
     p {
