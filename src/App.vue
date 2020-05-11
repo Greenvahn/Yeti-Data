@@ -1,8 +1,7 @@
 <template>
   <div id="app">
   <div class="main">
-    <h1>{{title}}</h1>
-    <p class="desc">{{description}}</p>
+    <headerPage></headerPage>
     <input-loader></input-loader>
   </div>
     <table-render></table-render>
@@ -14,13 +13,15 @@
 import inputLoader from './components/input-loader.vue'
 import tableRender from './components/table-render.vue'
 import modalMessage from './components/modal-msg.vue'
+import headerPage from './components/header-page.vue'
 
 export default {
   name: 'app',
   components: {
     inputLoader,
     tableRender,
-    modalMessage
+    modalMessage,
+    headerPage
   },
     methods:{
     },
@@ -67,15 +68,4 @@ export default {
         }
 
    }
-
-
-  h1{
-    font-size: 2.5em;
-    margin-bottom: 20px;
-  }
-
-  p{
-    margin-bottom: 10px;
-    &.desc{margin-bottom: 50px;}
-  }
 </style>
