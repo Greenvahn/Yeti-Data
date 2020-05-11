@@ -1,40 +1,19 @@
 <template>
-  <section class="hero">
-    <div class="hero-body">
-
-      <div class="hero-head">
-        <nav class="navbar">
-          <div class="container">
-            <div class="navbar-brand">
-              <a class="navbar-item">
-                <img src="images/yeti-logo.svg" alt="Logo" />
-              </a>
-              <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-            <div id="navbarMenuHeroA" class="navbar-menu">
-              <div class="navbar-end">
-                <span class="navbar-item">
-                  <a class="button is-primary is-inverted">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Download</span>
-                  </a>
-                </span>
-              </div>
-            </div>
+  <section class="hero is-primary is-bold">
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <img src="../images/yeti-logo.png" alt="Logo" />
+            </a>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
+    </div>
 
-      <div class="container">
-        <h1 class="title">{{title}}</h1>
-        <h2 class="subtitle">{{description}}</h2>
-      </div>
+    <div class="container">
+      <h2 class="subtitle">{{description}}</h2>
     </div>
   </section>
 </template>
@@ -63,10 +42,32 @@ h1 {
   margin-bottom: 20px;
 }
 
+h2.subtitle{
+    font-weight: bold;
+}
+
 p {
   margin-bottom: 10px;
   &.desc {
     margin-bottom: 50px;
+  }
+}
+
+.navbar-brand {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+
+  .navbar-item {
+    img {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+    }
   }
 }
 </style>

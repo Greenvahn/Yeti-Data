@@ -6,7 +6,34 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         title: 'Data display',
-        description: 'A single-page application to display your .csv files.',
+        mainText: [
+            {
+              content: [
+                {
+                    p: 'A single-page application to display your data files.',
+                    class: 'title align-center'
+                },
+                {
+                    p: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quam tortor, tempus vestibulum lectus at, elementum fringilla sapien. Praesent volutpat, orci id tempor interdum, ex elit vestibulum dui, a egestas mauris dui et libero.',
+                    class: 'align-center'
+                }
+              ],
+              type: 'introduction'
+            },
+            {
+              content :[
+                {
+                    p: 'What is CSV file?',
+                    class: 'info-title'
+                },
+                {
+                    p: 'A comma-separated values file is a delimited text file that uses a comma to separate values. Each line of the file is a data record. Each record consists of one or more fields, separated by commas.',
+                    class: ''
+                }
+              ],
+              type: 'information'
+            }
+        ],
         instructions: {
             main: 'Start by loading your csv file. After that, press on "launch" button to display the data.',
             button: 'launch'
@@ -537,7 +564,7 @@ export const store = new Vuex.Store({
         resetModal(state, payload) {
             state.modalStatus.value = payload;
         },
-        resetAll(state, payload){
+        resetAll(state, payload) {
             state.minichartOptions.launcher = payload; // button launcher
             state.minichartOptions.graphic.active = payload; // minichart options
             state.modalStatus.value = payload; // modals

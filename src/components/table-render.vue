@@ -1,6 +1,6 @@
 <template>
   <transition name="fadeIn">
-    <div v-if="dataTable" class="container marging-top">
+    <div v-if="dataTable" class="container tablewrap">
       <table>
         <tr
           v-for="(item, index) in dataTable"
@@ -82,8 +82,8 @@ export default {
 </script>
 
 <style lang="scss">
-.container.marging-top {
-  margin-top: 115px;
+.container.tablewrap{
+  margin-top: 40px;
 }
 
 table {
@@ -159,7 +159,7 @@ table {
   }
   100% {
     opacity: 1;
-    margin-top: 115px;
+    margin-top: 40px;
   }
 }
 </style>
