@@ -5,7 +5,7 @@
         <div class="container">
           <div class="navbar-brand">
             <a class="navbar-item">
-              <img src="../images/yeti-logo.png" alt="Logo" />
+              <img src="../assets/images/yeti-logo.png" alt="Logo" />
             </a>
           </div>
         </div>
@@ -13,14 +13,14 @@
     </div>
 
     <div class="container">
-      <h2 class="subtitle">{{description}}</h2>
+      <h2 class="subtitle">{{descriptionHero}}</h2>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: "header",
+  name: "topPage",
   components: {},
   methods: {},
   computed: {
@@ -28,7 +28,7 @@ export default {
       // get title from the store.js
       return this.$store.state.title;
     },
-    description() {
+    descriptionHero() {
       // get description from the store.js
       return this.$store.state.description;
     }
@@ -42,8 +42,8 @@ h1 {
   margin-bottom: 20px;
 }
 
-h2.subtitle{
-    font-weight: bold;
+h2.subtitle {
+  font-weight: bold;
 }
 
 p {

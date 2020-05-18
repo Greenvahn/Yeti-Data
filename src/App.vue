@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="main">
-      <headerPage></headerPage>
+      <topPage></topPage>
       <input-loader></input-loader>
       <table-render></table-render>
     </div>
@@ -13,7 +13,7 @@
 import inputLoader from "./components/input-loader.vue";
 import tableRender from "./components/table-render.vue";
 import modalMessage from "./components/modal-msg.vue";
-import headerPage from "./components/header-page.vue";
+import topPage from "./components/top-page.vue";
 
 export default {
   name: "app",
@@ -21,7 +21,7 @@ export default {
     inputLoader,
     tableRender,
     modalMessage,
-    headerPage
+    topPage
   },
   methods: {},
   computed: {
