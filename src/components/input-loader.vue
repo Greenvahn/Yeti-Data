@@ -3,7 +3,12 @@
     <div class="main-text">
       <div v-for="(section, index) in mainText" :class="section.type" :key="index">
         <p v-for="(el, index) in section.content" :class="el.class" :key="index">{{el.p}}</p>
-        <a v-for="(btn, index) in section.buttons" :class="btn.class"  :href="btn.itemURL" :key="'btn'+index">{{btn.txt}}</a>
+        <a
+          v-for="(btn, index) in section.buttons"
+          :class="btn.class"
+          :href="btn.itemURL"
+          :key="'btn'+index"
+        >{{btn.txt}}</a>
       </div>
     </div>
 
@@ -123,8 +128,8 @@ export default {
 
       this.$store.dispatch("reset", false);
     },
-    sampleCSV(event){
-     window.open('assets/sample.csv')
+    sampleCSV(event) {
+      window.open("assets/sample.csv");
     }
   },
   computed: {
@@ -207,7 +212,7 @@ input[type="file"] {
   flex-direction: row;
   justify-content: space-between;
   p {
-    width: 82%;
+    width: 83%;
   }
   button {
     width: 15%;
@@ -219,9 +224,10 @@ a.yeti-sample-csv {
   flex-direction: column;
   align-items: center;
 
-  width: 15%;
-  height: 50px;
-  line-height: 2.7em;
+  width: 14%;
+  padding: 5px;
+  line-height: 1.2em;
+  text-align: center;
   opacity: 0.8;
   margin-top: 15px;
   background: transparent;

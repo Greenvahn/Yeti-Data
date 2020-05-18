@@ -55,7 +55,7 @@ export const store = new Vuex.Store({
               ],
               buttons: [
                 {
-                    txt: 'Sample CSV',
+                    txt: 'Download Sample CSV',
                     class: 'yeti-sample-csv',
                     itemURL: 'assets/csv/sample.csv'
                 }
