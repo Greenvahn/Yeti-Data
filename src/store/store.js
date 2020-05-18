@@ -29,6 +29,18 @@ export const store = new Vuex.Store({
                 {
                     p: 'A comma-separated values file is a delimited text file that uses a comma to separate values. Each line of the file is a data record. Each record consists of one or more fields, separated by commas.',
                     class: ''
+                },
+                {
+                    p: 'How do I get a CSV file?',
+                    class: 'info-title'
+                },
+                {
+                    p: 'There are multiple ways to get a CSV file of your data. Some most of the data softwares have the option to export your data as CSV. It is also possible to generate your CSV manually for small data files.',
+                    class: ''
+                },
+                {
+                    p: 'Start by selecting one of the options from below.',
+                    class: 'message-body'
                 }
               ],
               type: 'information'

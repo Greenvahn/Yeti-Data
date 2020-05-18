@@ -1,6 +1,5 @@
 <template>
   <div class="wrap-text-launcher">
-
     <div class="main-text">
       <div v-for="(section, index) in mainText" :class="section.type" :key="index">
         <p v-for="(text, index) in section.content" :class="text.class" :key="index">{{text.p}}</p>
@@ -36,7 +35,6 @@
 
       <notification-loader></notification-loader>
     </div>
-
   </div>
 </template>
 
@@ -145,7 +143,8 @@ export default {
 </script>
 
 <style lang="scss">
-.launcher, .main-text {
+.launcher,
+.main-text {
   margin-top: 50px;
 }
 
@@ -164,6 +163,7 @@ input[type="file"] {
 .introduction,
 .information {
   p {
+    margin: 10px 0px;
     &.title {
       font-size: 2em;
       font-weight: bold;
@@ -171,19 +171,26 @@ input[type="file"] {
     &.info-title {
       font-size: 1.2em;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin: 35px 0px 10px 0px;
     }
     &.align-center {
       text-align: center;
     }
+    &.message-body {
+      color: #1d72aa;
+      text-align: center;
+      border: none;
+      font-size: 1.1em;
+      margin-top: 35px;
+    }
   }
 }
 
-.introduction{
+.introduction {
   margin-top: 50px;
 }
 
-.information{
+.information {
   margin: 50px 0px 75px 0px;
 }
 </style>
