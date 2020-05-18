@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-	"start": "vue-cli-service serve"
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
@@ -17,6 +17,8 @@
     "bulma": "^0.8.0",
     "core-js": "^3.6.4",
     "minimist": "^1.2.3",
+    "raw-loader": "^4.0.1",
+    "request": "^2.88.2",
     "sass": "^1.22.0",
     "sass-loader": "^8.0.2",
     "vue": "^2.6.10",

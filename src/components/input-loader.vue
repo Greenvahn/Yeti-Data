@@ -1,9 +1,14 @@
 <template>
   <div class="wrap-text-launcher">
-
     <div class="main-text">
       <div v-for="(section, index) in mainText" :class="section.type" :key="index">
-        <p v-for="(text, index) in section.content" :class="text.class" :key="index">{{text.p}}</p>
+        <p v-for="(el, index) in section.content" :class="el.class" :key="index">{{el.p}}</p>
+        <a
+          v-for="(btn, index) in section.buttons"
+          :class="btn.class"
+          :href="btn.itemURL"
+          :key="'btn'+index"
+        >{{btn.txt}}</a>
       </div>
     </div>
 
@@ -36,7 +41,6 @@
 
       <notification-loader></notification-loader>
     </div>
-
   </div>
 </template>
 
@@ -123,6 +127,9 @@ export default {
         });
 
       this.$store.dispatch("reset", false);
+    },
+    sampleCSV(event) {
+      window.open("assets/sample.csv");
     }
   },
   computed: {
@@ -145,8 +152,12 @@ export default {
 </script>
 
 <style lang="scss">
-.launcher, .main-text {
+.launcher,
+.main-text {
   margin-top: 50px;
+  button {
+    width: 100%;
+  }
 }
 
 input[type="file"] {
@@ -162,8 +173,11 @@ input[type="file"] {
 }
 
 .introduction,
-.information {
+.information,
+.sample-download {
+  margin: 50px 0px 35px 0px;
   p {
+    margin: 10px 0px;
     &.title {
       font-size: 2em;
       font-weight: bold;
@@ -171,19 +185,66 @@ input[type="file"] {
     &.info-title {
       font-size: 1.2em;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin: 35px 0px 10px 0px;
     }
     &.align-center {
       text-align: center;
     }
+    &.message-body {
+      color: #1d72aa;
+      text-align: center;
+      border: none;
+      font-size: 1.1em;
+      margin-top: 35px;
+    }
+  }
+
+  &.reduced-margin {
+    margin: 10px 0px 15px 0px;
+    &.last-segment {
+      margin-bottom: 65px;
+    }
   }
 }
 
-.introduction{
-  margin-top: 50px;
+.sample-download {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  p {
+    width: 83%;
+  }
+  button {
+    width: 15%;
+  }
 }
 
-.information{
-  margin: 50px 0px 75px 0px;
+a.yeti-sample-csv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 14%;
+  padding: 5px;
+  line-height: 1.2em;
+  text-align: center;
+  opacity: 0.8;
+  margin-top: 15px;
+  background: transparent;
+  border-radius: 5px;
+  border: 2px solid #3298dc;
+  cursor: pointer;
+  font-weight: bold;
+  color: #3298dc;
+
+  &:hover {
+    opacity: 1;
+    background-color: #3298dc;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 </style>

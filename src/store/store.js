@@ -32,6 +32,35 @@ export const store = new Vuex.Store({
                 }
               ],
               type: 'information'
+            },
+            {
+              content :[
+                {
+                    p: 'How do I get a CSV file?',
+                    class: 'info-title'
+                },
+                {
+                    p: 'There are multiple ways to get a CSV file of your data. Some most of the data softwares have the option to export your data as CSV. It is also possible to generate your CSV manually for small data files.',
+                    class: ''
+                }
+              ],
+              type: 'information reduced-margin'
+            },
+            {
+              content :[
+                {
+                    p: 'You always can use our sample file. Feel free to edit and play with it. Download it at any time by pressing the button next to this paragraph.',
+                    class: ''
+                }
+              ],
+              buttons: [
+                {
+                    txt: 'Download Sample CSV',
+                    class: 'yeti-sample-csv',
+                    itemURL: 'assets/csv/sample.csv'
+                }
+              ],
+              type: 'sample-download reduced-margin last-segment'
             }
         ],
         instructions: {
