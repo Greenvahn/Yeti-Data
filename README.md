@@ -32,6 +32,7 @@ $ npm start
 
 ### Scripts available
 Once the project has been installed, the following scripts to use:
+
 **start** - runs project locally
 ```
 $ npm start
