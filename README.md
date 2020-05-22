@@ -52,6 +52,6 @@ Upload your CSV file, launch it and see your data. Create a chart based on your 
 If you don't have any CSV file on hand, use the sample file attached to this project.
 
 ## License
-You can check out the full license [here](https://github.com/Greenvahn/vue-dataDisplay).
+You can check out the full license [here](https://github.com/Greenvahn/vue-dataDisplay/blob/master/LICENSE).
 
 This project is licensed under the terms of the **MIT** license.
