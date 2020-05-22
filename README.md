@@ -1,8 +1,5 @@
 # Yeti Data
-Single-page application to load and display data files formmated as [csv](https://en.wikipedia.org/wiki/Comma-separated_values) using frameworks as [vuejs](https://vuejs.org/), [vuex](https://vuex.vuejs.org/) and [bulma](https://bulma.io/bulma-start/). A quick way to have your data file into a bars chart.
-
-## Motivations
-This is training project where the main objective is to consolidate and put in practice some of the skills learnt about vuejs along the time. For another hand, the project aims to create a simple way to displays quickly data without using 3rd libraries for data visualisation.
+Single-page application to load and display data files formmated as [csv](https://en.wikipedia.org/wiki/Comma-separated_values) using frameworks as [vuejs](https://vuejs.org/), [vuex](https://vuex.vuejs.org/) and [bulma](https://bulma.io/bulma-start/). A quick way to have your data file into a bars chart. The project aims to create a simple way to display data without using third part libraries for data visualisation.
 
 ## Technologies
 Project is created with:
