@@ -4,6 +4,7 @@
       <topPage></topPage>
       <input-loader></input-loader>
       <table-render></table-render>
+      <footer-page></footer-page>
     </div>
     <modal-message></modal-message>
   </div>
@@ -14,6 +15,7 @@ import inputLoader from "./components/input-loader.vue";
 import tableRender from "./components/table-render.vue";
 import modalMessage from "./components/modal-msg.vue";
 import topPage from "./components/top-page.vue";
+import footerPage from "./components/footer-page.vue";
 
 export default {
   name: "app",
@@ -21,7 +23,8 @@ export default {
     inputLoader,
     tableRender,
     modalMessage,
-    topPage
+    topPage,
+    footerPage
   },
   methods: {},
   computed: {
