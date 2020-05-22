@@ -29,9 +29,10 @@ export default {
 @import "bulma";
 .footer {
   background-color: #eef2f5 !important;
-  position: fixed;
+  position: relative;
   bottom: 0px;
   width: 100%;
   padding: 1.5em 0em !important;
+  margin-top: 100px;
 }
 </style>
