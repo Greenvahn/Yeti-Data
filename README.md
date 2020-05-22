@@ -42,7 +42,7 @@ $ npm build
 ## Usage
 Upload your CSV file, launch it and see your data. Create a chart based on your date by choosing two columns ( labels and values). Launch the chart. To create a new chart, just change any of the columns.
 
-If you don't have any CSV file on hand, use the sample file attached to this project.
+If you don't have any CSV file on hand, use the [sample file](https://github.com/Greenvahn/vue-dataDisplay/blob/master/sample.csv) attached to this project.
 
 ## License
 You can check out the full license [here](https://github.com/Greenvahn/vue-dataDisplay/blob/master/LICENSE).
