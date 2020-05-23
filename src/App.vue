@@ -53,7 +53,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #f7fafc;
 }
 
 #app {
@@ -64,7 +63,8 @@ body {
   .main {
     margin: 0 auto;
     width: 100%;
-    height: 100%;
+    height: auto;
+    background: #f7fafc;
     // max-width: 900px;
     // max-height: 300px;
     .message {
@@ -81,7 +81,7 @@ body {
   max-width: 990px;
 }
 
-.tablewrap{
+.tablewrap {
   width: 100%;
   // height: auto;
   // margin: 0 auto;
