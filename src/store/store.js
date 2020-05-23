@@ -473,7 +473,6 @@ export const store = new Vuex.Store({
                     ============================
                     * mutates the state of the dataFile with dataArray values
                     */
-                    console.table(dataArray);
                     state.dataFile = dataArray;
 
                 }
@@ -520,8 +519,6 @@ export const store = new Vuex.Store({
             /* Check launch button for minichart
             * If labels and values are equal numbers --> options have been selected --> launcher button = true
             */
-
-            console.log("----------------------> ", chartInputs.labels, chartInputs.values)
 
             chartInputs.labels && chartInputs.values ||
                 chartInputs.labels === 0 && chartInputs.values ||
