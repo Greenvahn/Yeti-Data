@@ -251,8 +251,11 @@ export default {
   }
 
 
-  select{
-    width: 300px;
+  .select {
+    width: 100%;
+    select { 
+      width: 100%;
+    } 
   }
 }
 
@@ -288,5 +291,18 @@ export default {
     opacity: 1;
     margin-left: 0px;
   }
+}
+
+
+@media only screen and (max-width: 720px) { 
+  .wrap-instructions {
+    flex-direction: column;
+    .inst-txt{
+      position: relative;
+      left: 0;
+      width: 100%;
+    }
+  }
+
 }
 </style>

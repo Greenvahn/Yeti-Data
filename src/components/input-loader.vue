@@ -163,10 +163,6 @@ input[type="file"] {
   display: none;
 }
 
-.container {
-  max-width: 500px;
-}
-
 .file-label {
   background: white;
 }
