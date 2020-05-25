@@ -162,4 +162,8 @@ table {
     margin-top: 40px;
   }
 }
+
+
+/* Media queries */
+
 </style>
