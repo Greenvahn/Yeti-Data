@@ -83,8 +83,51 @@ body {
 
 .tablewrap {
   width: 100%;
-  // height: auto;
-  // margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1000px;
+  padding: 0 20px;
+}
+
+.wrap-text-launcher {
+  padding: 0 20px;
+}
+
+// ***  MEDIA QUERIES *** //
+
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  .notification-holder {
+    display: none;
+  }
+
+  .tablewrap table {
+    zoom: 39%;
+  }
+  
+  .is-one-fifths {
+    margin: 0 auto;
+  }
+
+  .modal-content {
+    width: 300px;
+  }
+
+  .wrap-instructions {
+    flex-direction: column;
+    .inst-txt{
+      position: relative;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  .control.columns { min-height: 290px }
+  .bar {max-width: 275px !important }
+  .footer p { padding: 0 10px;}
 }
 </style>

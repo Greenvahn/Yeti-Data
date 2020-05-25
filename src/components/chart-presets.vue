@@ -15,7 +15,7 @@
         <div class="inst-txt" v-if="showInstructions">
           <p>Here you can select the presets of the chart. You will be able to select a column for labels and other for values.</p>
           <p>
-            <b>Start by pressing the button on the left of this text.</b>
+            <b>Start by pressing the chart button from this container.</b>
           </p>
         </div>
       </div>

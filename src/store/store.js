@@ -14,7 +14,7 @@ export const store = new Vuex.Store({
                     class: 'title align-center'
                 },
                 {
-                    p: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quam tortor, tempus vestibulum lectus at, elementum fringilla sapien. Praesent volutpat, orci id tempor interdum, ex elit vestibulum dui, a egestas mauris dui et libero.',
+                    p: 'A quick way to have your data CSV files into charts without using third part libraries.',
                     class: 'align-center'
                 }
               ],

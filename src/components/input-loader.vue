@@ -115,7 +115,6 @@ export default {
             "%cFileReader --> Successful.",
             "color:white; background-color:green"
           );
-         // console.table(reader.result);
         }
       }),
         // On error..
@@ -245,6 +244,25 @@ a.yeti-sample-csv {
 
   &:focus {
     outline: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sample-download {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    p {
+      width: 100%;
+    }
+    a.yeti-sample-csv {
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      width: 35%;
+      padding: 10px;
+      text-align: center;
+    }
   }
 }
 </style>
