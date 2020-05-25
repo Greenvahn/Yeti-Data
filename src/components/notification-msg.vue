@@ -104,4 +104,9 @@ export default {
     margin-left: 0px;
   }
 }
+
+
+@media only screen and (max-width: 600px) {
+  .notification-holder { display: none;}
+}
 </style>

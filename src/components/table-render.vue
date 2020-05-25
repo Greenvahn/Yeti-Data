@@ -165,5 +165,7 @@ table {
 
 
 /* Media queries */
-
+@media only screen and (max-width: 720px) {
+  .tablewrap table { zoom: 50%;}
+}
 </style>
