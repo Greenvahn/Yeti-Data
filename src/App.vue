@@ -83,8 +83,10 @@ body {
 
 .tablewrap {
   width: 100%;
-  // height: auto;
-  // margin: 0 auto;
   max-width: 1200px;
+}
+
+.wrap-text-launcher{
+  padding: 0 20px;
 }
 </style>
