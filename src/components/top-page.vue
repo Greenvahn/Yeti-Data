@@ -1,14 +1,15 @@
 <template>
-  <section class="hero is-primary is-bold">
+  <section class="hero is-link is-bold">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
           <div class="navbar-brand">
             <a class="navbar-item">
-              <img src="../assets/images/yeti-logo.png" alt="Logo" />
+              <img src="../assets/images/yeti-logo_white.png" alt="Logo" />
             </a>
           </div>
         </div>
+        <div class="header-deco"></div>
       </nav>
     </div>
 
@@ -63,11 +64,20 @@ p {
   align-self: center;
 
   .navbar-item {
+    pointer-events: none;
     img {
       width: 100%;
       height: 100%;
       max-height: 100%;
     }
   }
+}
+
+.header-deco {
+  position: absolute;
+  bottom: 0px;
+  background: url("../assets/images/pattern.png") 0px 0px repeat;
+  width: 100%;
+  height: 45px;
 }
 </style>
