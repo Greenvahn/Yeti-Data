@@ -13,9 +13,9 @@
           </span>
         </button>
         <div class="inst-txt" v-if="showInstructions">
-          <p>Here you can select the presets of the chart. You will be able to select a column for labels and other for values.</p>
+          <p>Select the data you want to visualise. You'll need a column for labels and another for values.</p>
           <p>
-            <b>Start by pressing the chart button from this container.</b>
+            <b>Hit the button to start.</b>
           </p>
         </div>
       </div>
