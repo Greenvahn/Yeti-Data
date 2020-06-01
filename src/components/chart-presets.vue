@@ -13,9 +13,8 @@
           </span>
         </button>
         <div class="inst-txt" v-if="showInstructions">
-          <p>Select the data you want to visualise. You'll need a column for labels and another for values.</p>
-          <p>
-            <b>Hit the button to start.</b>
+          <p v-for="(para,index) in giveMeInstructions" :class="para.class" :key="index">
+            {{para.text}}
           </p>
         </div>
       </div>
@@ -125,6 +124,16 @@ export default {
 
       return _dropdownOptions;
     },
+    giveMeInstructions() {
+      // // Retrieves button data object from store.js
+      let _computedButtonLib = this.$store.getters.getButtonLib;
+
+      // Access to the INSTRUCTIONS from buttons array from the store.js
+      _computedButtonLib = _computedButtonLib.instructions;
+
+      // Returns array of instructions
+      return _computedButtonLib
+    },
     generatedOptions(type) {
       const _dataTable = this.$store.getters.getTable;
 
@@ -229,6 +238,10 @@ export default {
     opacity: 0.3;
     pointer-events: none;
   }
+}
+
+p.bold{
+  font-weight: bold;
 }
 
 .chart-options {
