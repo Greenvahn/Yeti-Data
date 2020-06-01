@@ -198,6 +198,7 @@ input[type="file"] {
     margin: 10px 0px 15px 0px;
     &.last-segment {
       margin-bottom: 65px;
+      margin-top: -10px;
     }
   }
 }

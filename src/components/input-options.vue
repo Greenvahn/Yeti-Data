@@ -7,14 +7,14 @@
         </div>
         <div class="column is-10">
           <div class="columns">
-            <div v-for="(item, index) in renderOptions" v-bind:key="index" class="column is-3">
+            <div v-for="(item, index) in renderOptions" v-bind:key="index" class="column is-4">
               <label class="checkbox">
                 <input
                   type="checkbox"
                   v-on:change="commitValue(item.name, item.value)"
                   v-model="item.value"
                 />
-                {{item.name}}
+                {{item.text}}
               </label>
             </div>
           </div>
