@@ -1,5 +1,11 @@
-# Yeti Data
+
+<p align="center">
+  <img alt="logo" width="250px" height="250px" src="https://github.com/Greenvahn/Yeti-Data/blob/master/yeti-logo-blue.jpg?raw=true">
+</p>
+
 Single-page application to load and display data files formmated as [csv](https://en.wikipedia.org/wiki/Comma-separated_values) using frameworks as [vuejs](https://vuejs.org/), [vuex](https://vuex.vuejs.org/) and [bulma](https://bulma.io/bulma-start/). A quick way to have your data file into a bars chart. The project aims to create a simple way to display data without using third part libraries for data visualisation.
+
+Take a look at the **[live demo](https://yeti-data.web.app/)**.
 
 ## Technologies
 Project is created with:
